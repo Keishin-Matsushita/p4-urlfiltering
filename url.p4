@@ -79,22 +79,22 @@ header tcp_t
 
 header tcp_opt_t 
 {
-	varbit<320> option;
+    varbit<320> option;
 }
 
 header char_t
 {
-	bit<8> ch;
+    bit<8> ch;
 }
 
 struct headers 
 {
     ethernet_t   ethernet;
-	arp_t		 arp;
+    arp_t		 arp;
     ipv4_t       ipv4;
     tcp_t        tcp;
-	tcp_opt_t    tcp_opt;
-	char_t[32]   http_url; // POROTOCOL AND URL MAX LENGTH 32
+    tcp_opt_t    tcp_opt;
+    char_t[32]   http_url; // POROTOCOL AND URL MAX LENGTH 32
 }
 
 struct metadata 
@@ -111,15 +111,15 @@ struct metadata
 // P A R S E R -----------------------------------------------------------
 
 parser UrlParser(
-	packet_in packet,
-	out headers hdr,
-	inout metadata meta,
-	inout standard_metadata_t standard_metadata
+    packet_in packet,
+    out headers hdr,
+    inout metadata meta,
+    inout standard_metadata_t standard_metadata
 ) 
 {
 
     state start
-	{ 
+    { 
         transition parse_ethernet;
     }
 
@@ -127,7 +127,7 @@ parser UrlParser(
     {
         packet.extract(hdr.ethernet);
         transition select(hdr.ethernet.etherType) 
-		{
+	{
             TYPE_ARP:  parse_arp;
             TYPE_IPV4: parse_ipv4;
             default: accept;
@@ -144,7 +144,7 @@ parser UrlParser(
     {
         packet.extract(hdr.ipv4);
         transition select(hdr.ipv4.protocol)
-		{
+	{
             TYPE_TCP: parse_tcp;
             default: accept;
         }
@@ -153,28 +153,28 @@ parser UrlParser(
     state parse_tcp
     {
         packet.extract(hdr.tcp);
-		// INITIALZIE http url info
-		meta.url_len = 0;
+	// INITIALZIE http url info
+	meta.url_len = 0;
     	meta.url_isvalid = 0;
         transition select(hdr.tcp.dataOffset)
-		{
-			5: parse_tcp_port;
-			default: parse_tcp_option;
-		}
+	{
+	    5: parse_tcp_port;
+	    default: parse_tcp_option;
 	}
+    }
 
     state parse_tcp_option
-	{
-		bit<32> opt_size = ((bit<32>)hdr.tcp.dataOffset) * 32 - 160;
+    {
+	bit<32> opt_size = ((bit<32>)hdr.tcp.dataOffset) * 32 - 160;
         packet.extract(hdr.tcp_opt,opt_size);
         transition parse_tcp_port;
-	}
+    }
 
     state parse_tcp_port
-	{
+    {
         transition select(hdr.tcp.dstPort)
-		{
-			// PARSE TARGET DST PORT
+	{
+	    // PARSE TARGET DST PORT
             80:  parse_http_url_init;
             445: parse_http_url_init;
             8000:  parse_http_url_init;
@@ -182,30 +182,30 @@ parser UrlParser(
         }
     }
 
-	// CLEAR URL DATA 0 FILLING
+    // CLEAR URL DATA 0 FILLING
     state parse_http_url_init
-	{
+    {
 #include "include/parse.p4"		
         transition parse_http_url;
-	}
+    }
 	
 
-	// PARSE URL STRING
+    // PARSE URL STRING
     state parse_http_url
-	{
-		packet.extract(hdr.http_url.next);
-		meta.url_len = meta.url_len + 1;
+    {
+	packet.extract(hdr.http_url.next);
+	meta.url_len = meta.url_len + 1;
     	meta.url_isvalid = 1;
         transition select(hdr.http_url.last.ch)
-		{
-			/* INCOMPLETE SEQUENCE
-			0x23: accept; // '#' 
-			0x3f: accept; // '?' 
-			*/
-			0x0a: accept; // LF
+	{
+	    /* INCOMPLETE SEQUENCE
+	    0x23: accept; // '#' 
+	    0x3f: accept; // '?' 
+	    */
+	    0x0a: accept; // LF
             default: parse_http_url;
-		}
 	}
+    }
 
 }
 
@@ -217,101 +217,101 @@ parser UrlParser(
 // I N G R E S S   P R O C E S S I N G -----------------------------------
 
 control UrlIngress(
-	inout headers hdr,
-	inout metadata meta,
-	inout standard_metadata_t standard_metadata
+    inout headers hdr,
+    inout metadata meta,
+    inout standard_metadata_t standard_metadata
 ) 
 {
 
-	// PACKET DROPPING
+    // PACKET DROPPING
     action drop() 
-	{
+    {
         mark_to_drop(standard_metadata);
     }
 
-	// PACKET MULTICASTING
-	action act_multicast()
-	{
-		standard_metadata.mcast_grp = 1;
+    // PACKET MULTICASTING
+    action act_multicast()
+    {
+	standard_metadata.mcast_grp = 1;
     }
 
-	// PACKET FORWARD PORT SETTING
-	action act_port_fwd( bit<9> port )
-	{
+    // PACKET FORWARD PORT SETTING
+    action act_port_fwd( bit<9> port )
+    {
         standard_metadata.egress_spec = port;
-	}
+    }
 
-	// PACKET FORWARD PORT SETTING
-	table tbl_port 
+    // PACKET FORWARD PORT SETTING
+    table tbl_port 
+    {
+   	key = 
+	{ 
+	    // CHECK DISTINATION IP ADDR
+            hdr.ipv4.dstAddr: exact;
+	}
+	actions =
 	{
-   		key = 
-		{ 
-			// CHECK DISTINATION IP ADDR
-        	hdr.ipv4.dstAddr: exact;
-		}
-		actions =
-		{
-			act_port_fwd;
-			NoAction;
-		}
+	    act_port_fwd;
+	    NoAction;
+	}
         default_action = NoAction();
 
-		// 10.0.0.1 -> port(1)
-		// 10.0.0.2 -> port(2)
-		// 10.0.0.3 -> port(3)
-		const entries =
-		{
-			(0x0a000001): act_port_fwd(1);
-			(0x0a000002): act_port_fwd(2);
-			(0x0a000003): act_port_fwd(3);
-		}
-	}
-
-	// URL MATCHED TO DROP 
-	action act_http_url_match()
+	// 10.0.0.1 -> port(1)
+	// 10.0.0.2 -> port(2)
+	// 10.0.0.3 -> port(3)
+	const entries =
 	{
+	    (0x0a000001): act_port_fwd(1);
+	    (0x0a000002): act_port_fwd(2);
+	    (0x0a000003): act_port_fwd(3);
+	}
+    }
+
+    // URL MATCHED TO DROP 
+    action act_http_url_match()
+    {
         mark_to_drop(standard_metadata);
-	}
+    }
 
-	// URL MATCHING
-	table tbl_http_url
+    // URL MATCHING
+    table tbl_http_url
+    {
+	key =
 	{
-		key =
-		{
-		// URL MATCH KEY
+	    // URL MATCH KEY
 #include "include/tbl.p4"
-		}
-		actions =
-		{
-			act_http_url_match;
-			NoAction;
-		}
+	}
+	actions =
+	{
+	    act_http_url_match;
+	    NoAction;
+	}
         default_action = NoAction();
 
-		// URL MATCH DATA
-		const entries = {
+	// URL MATCH DATA
+	const entries = {
 #include "include/url.p4"
-		}
 	}
+    }
 
     apply 
+    {
+	if( hdr.arp.isValid() )
 	{
-		if( hdr.arp.isValid() )
-		{
-			// IF ARP THEN MULTICASTING
-			act_multicast();
-		}
-		else if( hdr.ipv4.isValid() )
-		{
-			// IP PACKET PORT SETTING BY DST IP ADDR
-			tbl_port.apply();
+	    // IF ARP THEN MULTICASTING
+	    act_multicast();
+	}
+	else if( hdr.ipv4.isValid() )
+	{
+	    // IP PACKET PORT SETTING BY DST IP ADDR
+	    tbl_port.apply();
 
-        	if( meta.url_isvalid == 1 )
-			{
-				// IF HTTP URL PACKET MATCH TABLE APPLY
-				tbl_http_url.apply();
-        	}
-		}
+            if( meta.url_isvalid == 1 )
+	    {
+	        // IF HTTP URL PACKET MATCH TABLE APPLY
+		tbl_http_url.apply();
+            }
+	}
     }
 }
 
@@ -322,23 +322,23 @@ control UrlIngress(
 // E G R E S S   P R O C E S S I N G --------------------------------------
 
 control UrlEgress(
-	inout headers hdr,
-	inout metadata meta,
-	inout standard_metadata_t standard_metadata
+    inout headers hdr,
+    inout metadata meta,
+    inout standard_metadata_t standard_metadata
 ) 
 {
     action drop() 
-	{
+    {
         mark_to_drop(standard_metadata);
     }
 
     apply 
-	{
+    {
         // Prune multicast packet to ingress port to preventing loop
         if( standard_metadata.egress_port == standard_metadata.ingress_port )
-		{
+	{
             drop();
-		}
+	}
     }
 }
 
@@ -349,12 +349,12 @@ control UrlEgress(
 // D E P A R S E R  -----------------------------------------------------
 
 control UrlDeparser(
-	packet_out packet,
-	in headers hdr
+    packet_out packet,
+    in headers hdr
 ) 
 {
     apply 
-	{
+    {
         packet.emit(hdr.ethernet);
         packet.emit(hdr.arp);
         packet.emit(hdr.ipv4);
@@ -371,8 +371,8 @@ control UrlDeparser(
 // C H E C K S U M    V E R I F I C A T I O N  ---------------------------
 
 control UrlVerifyChecksum(
-	inout headers hdr,
-	inout metadata meta
+    inout headers hdr,
+    inout metadata meta
 )
 {   
     apply {}
@@ -381,7 +381,10 @@ control UrlVerifyChecksum(
 
 // C H E C K S U M    C O M P U T A T I O N  -----------------------------
 
-control UrlComputeChecksum(inout headers  hdr, inout metadata meta)
+control UrlComputeChecksum(
+    inout headers  hdr,
+    inout metadata meta
+)
 { 
 	apply {}
 }
@@ -394,11 +397,11 @@ control UrlComputeChecksum(inout headers  hdr, inout metadata meta)
 // S W I T C H -----------------------------------------------------------
 
 V1Switch(
-	UrlParser(),
-	UrlVerifyChecksum(),
-	UrlIngress(),
-	UrlEgress(),
-	UrlComputeChecksum(),
-	UrlDeparser()
+    UrlParser(),
+    UrlVerifyChecksum(),
+    UrlIngress(),
+    UrlEgress(),
+    UrlComputeChecksum(),
+    UrlDeparser()
 ) main;
 
