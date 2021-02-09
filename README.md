@@ -147,7 +147,7 @@ In standard http.server, URL blocking by the s1 switch causes the server to beco
 - URL including HTTP COMMAND(GET,POST,HEAD etc.) and HTTP Version(HTTP/1.1 etc.)  
   組み込む URL には HTTP コマンド、バージョンが含まれています。
 - MAX URL Length is 32  
-  URL の長さはコマンド、HTTP Version 含めて最大 32 文字です。
+  URL の長さはコマンド、バージョン含めて最大 32 文字です。
 - The P4 Table is entered as a constant in the P4 program instead of being submitted from C-Plane  
   P4 Table は C-Plane から投入するのではなく、P4 プログラム内に constant でエントリされてます。
    
