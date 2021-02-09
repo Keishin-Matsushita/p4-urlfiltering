@@ -126,6 +126,6 @@ topology.json
    ```
    
    ```
-   Note: MAX URL Length is `32`.
+   Note: MAX URL Length is 32.
    ```
 
