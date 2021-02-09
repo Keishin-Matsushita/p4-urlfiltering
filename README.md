@@ -1,6 +1,15 @@
 # p4-urlfiltering
 web url filtering by p4 language
 
+```bash
+Ubuntu 16.04 TLS P4 tutorial VM
+https://github.com/p4lang/tutorials
+under run into P4 
+
+$ cd tutolials/exercises
+$ git clone 
+```
+
 
 # Implementing url filtering 
 
