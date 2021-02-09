@@ -32,12 +32,12 @@ topology.json
 ## Step 1: install threading http server
 
    ```bash
-   $ ./install.sh
+   $ bash ./install.sh
    ```
    ... installed python3 lib ComplexHTTPServer
 
 
-## Step 2: Run the p4 code 'url.p4'
+## Step 2: Run the p4 code `url.p4`
 
 1. In your shell, run:
 
@@ -56,12 +56,12 @@ topology.json
    ```bash
    mininet> xterm h2 h3
    ```
-   Node:h2
+   `Node:h2`
    ```bash
    # python3 -m ComplexHTTPServer 80
    ```
 
-   Node:h3
+   `Node:h3`
    ```bash
    # python3 -m ComplexHTTPServer 80
    ```
@@ -74,7 +74,7 @@ topology.json
 
 5. web client packet send to each web server URL
 
-   Node:h1
+   `Node:h1`
    ```bash
    # curl http://10.0.0.3/
    hello index
@@ -113,7 +113,7 @@ topology.json
 
 ## Step 3: Edit the filtering URL list
 
-   editng URL list and re-rune url.p4
+   edit URL list and re-rune url.p4
 
    ```bash
    $ cd include
@@ -126,6 +126,6 @@ topology.json
    ```
    
    ```
-   Note: MAX URL Length is 32.
+   Note: MAX URL Length is `32`.
    ```
 
