@@ -102,7 +102,6 @@ topology.json
 ## Step 3: Edit the filtering URL list
 
    editng URL list and re-rune url.p4
-   Note: MAX URL Length is 32.
 
    ```bash
    $ cd include
@@ -112,5 +111,9 @@ topology.json
    $ cd ..
    // re-run url.p4
    $ make stop; make clean; make 
+   ```
+   
+   ```
+   Note: MAX URL Length is 32.
    ```
 
