@@ -44,15 +44,15 @@ topology.json
    ```bash
    mininet> xterm h2 h3
    ```
-       Node:h2
-       ```bash
-       # python3 -m ComplexHTTPServer 80
-       ```
+   Node:h2
+   ```bash
+   # python3 -m ComplexHTTPServer 80
+   ```
 
-       Node:h3
-       ```bash
-       # python3 -m ComplexHTTPServer 80
-       ```
+   Node:h3
+   ```bash
+   # python3 -m ComplexHTTPServer 80
+   ```
 
 
 4. Type `xterm` to invoke client window
