@@ -109,8 +109,8 @@ In standard http.server, URL blocking by the s1 switch causes the server to beco
    ```
 
    ```
-   factory-setting omitt URL list ( in [include/url.p4](include/url.p4) )
-   工場出荷での URL 遮断リストは以下の通りです。( [include/url.p4](include/url.p4)にあります )
+   factory-setting omitt URL list ( in include/url.p4 )
+   工場出荷での URL 遮断リストは以下の通りです。( include/url.p4 にあります )
 	  http://10.0.0.2/
 	  http://10.0.0.2/hello.html
 	  http://10.0.0.3/index.html
