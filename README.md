@@ -2,7 +2,8 @@
 web url filtering by p4 language
 
 ```bash
-Ubuntu 16.04 TLS P4 tutorial VM:
+P4 version 16 SEP 2020.
+Ubuntu 16.04 TLS P4 tutorial VM
 VirtualBox VM from https://github.com/p4lang/tutorials
 under run into P4 Development Environment
 
