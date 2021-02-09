@@ -4,16 +4,12 @@ P4言語で実現する url フィルタリング
 
 
 ```bash
-P4 version 16 SEP 2020.
-P4 のバージョンは 2020/08/16 となります。
-Ubuntu 16.04 TLS P4 tutorial VM
-P4 チュートリアルで作成する Ubuntu 16.04TLS VM で動作します。
+P4 version 16 SEP 2020.    P4 のバージョンは 2020/08/16 となります。
+Ubuntu 16.04 TLS P4 tutorial VM   P4 チュートリアルで作成する Ubuntu 16.04TLS VM で動作します。
 VirtualBox VM from https://github.com/p4lang/tutorials
 VM の作成方法は上記 URL を参照してください。
-under run into P4 Development Environment
-P4 開発環境の配下で動作します。
-The procedure for installation and running is as follows:
-インストールと走行は以下の手順となります。
+under run into P4 Development Environment   P4 開発環境の配下で動作します。
+The procedure for installation and running is as follows:   インストールと走行は以下の手順となります。
 
 $ cd tutolials/exercises
 $ git clone https://github.com/Keishin-Matsushita/p4-urlfiltering.git
@@ -26,7 +22,7 @@ $ make
 ## Implementing url filtering 
 
 [The topology of the driving environment is as follows.](topology.json)  
-[走行環境のトポロジーは以下となります。](topology.json)  
+走行環境のトポロジーは以下となります。 
 run h1 as a web client and h2 and h3 as an http server.  
 h1 は Web クライアント、h2,h3 は http server として動作させます。  
 
@@ -95,7 +91,6 @@ In standard http.server, URL blocking by the s1 switch causes the server to beco
 
 5. Try sending a request from the web client to each server.
    web client から各サーバにリクエストを送ってみます。
-
    `Node:h1`
    ```bash
    # curl http://10.0.0.3/
