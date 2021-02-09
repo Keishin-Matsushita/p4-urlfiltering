@@ -3,7 +3,7 @@
 //*    SOURCE: url.p4                                                *
 //*   PURPOSE: URL Filterng by p4                                    *
 //* FORMATTED: P4_16 v1model (16 SEP 2020 version)                   *
-//*   WRITTEN: 2021/02/09 Matsushita "spicy" Keishin, NTT-TX         *
+//*   WRITTEN: 2021/02/09 Matsushita "spicy" Keishin                 *
 //********************************************************************
 
 #include <core.p4>
