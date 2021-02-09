@@ -2,12 +2,15 @@
 web url filtering by p4 language
 
 ```bash
-Ubuntu 16.04 TLS P4 tutorial VM
-https://github.com/p4lang/tutorials
-under run into P4 
+Ubuntu 16.04 TLS P4 tutorial VM:
+VirtualBox VM from https://github.com/p4lang/tutorials
+under run into P4 Development Environment
 
 $ cd tutolials/exercises
-$ git clone 
+$ git clone https://github.com/Keishin-Matsushita/p4-urlfiltering.git
+$ cd p4-urlfiltering
+$ make
+
 ```
 
 
