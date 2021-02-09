@@ -1,6 +1,5 @@
 ### p4-urlfiltering
-web url filtering by p4 language
-
+web url filtering by p4 language  
 P4言語で実現する url フィルタリング
 
 
@@ -26,10 +25,10 @@ $ make
 
 ## Implementing url filtering 
 
-[The topology of the driving environment is as follows.](topology.json)
-[走行環境のトポロジーは以下となります。](topology.json)
-run h1 as a web client and h2 and h3 as an http server.
-h1 は Web クライアント、h2,h3 は http server として動作させます。
+[The topology of the driving environment is as follows.](topology.json)  
+[走行環境のトポロジーは以下となります。](topology.json)  
+run h1 as a web client and h2 and h3 as an http server.  
+h1 は Web クライアント、h2,h3 は http server として動作させます。  
 
                 h1 web client
                  |
@@ -43,7 +42,9 @@ h1 は Web クライアント、h2,h3 は http server として動作させま�
                 http servers
 
 
-## Step 1: install threading http server
+## Step 1: install threading http server (スレッド型 http server のインストール)  
+In standard http.server, URL blocking by the s1 switch causes the server to become unresponsive.  
+標準の http.server では s1 スイッチによる URL 遮断により、以降 server が応答しなくなります。 
 
    ```bash
    $ bash ./install.sh
@@ -51,62 +52,70 @@ h1 は Web クライアント、h2,h3 は http server として動作させま�
    ... installed python3 lib ComplexHTTPServer
 
 
-## Step 2: Run the p4 code `url.p4`
+## Step 2: Run the p4 code `url.p4` (url.p4 を作動させる方法です)
 
 1. In your shell, run:
-
+   シェルで以下のコマンドを打ちます。
    ```bash
    $ make 
    ```
 
-2. You should now see a Mininet command prompt. Try to ping between
+2. You should now see a Mininet command prompt. Try to ping between  
    hosts in the topology:
+   Mininetコマンドプロンプトが表示されます。 ホスト間で ping を実行してみてください。
    ```bash
    mininet> h1 ping h2
    mininet> pingall
    ```
 
-3. Type `xterm` to invoke http server
+3. Type `xterm` to run the http server.
+   http server を動かすために、xterm を起動します。
    ```bash
    mininet> xterm h2 h3
    ```
-   `Node:h2`
+   Web Server runs on each terminal as follows.  
+   Web Server は各端末で以下のように実行します。
+  
+   Node:h2
    ```bash
    # python3 -m ComplexHTTPServer 80
    ```
 
-   `Node:h3`
+   Node:h3
    ```bash
    # python3 -m ComplexHTTPServer 80
    ```
 
 
-4. Type `xterm` to invoke client window
+4. Type `xterm` to run the web client.
+   web client を動かすために、xterm を起動します。
    ```bash
    mininet> xterm h1
    ```
 
-5. web client packet send to each web server URL
+5. Try sending a request from the web client to each server.
+   web client から各サーバにリクエストを送ってみます。
 
    `Node:h1`
    ```bash
    # curl http://10.0.0.3/
-   hello index
+   hello index 　　　　　　　　　　　　  (response/応答が返ります)
    # curl http://10.0.0.2/
-   -- no reply by s1 url omitting (filtering)
-   -- type CTL-C
+   -- no reply by s1 url filtering　 (s1 url filtering により応答が返りません)
+   -- type CTL-C                     (CTL-C を押してコマンドを停止してください)
    # curl http://10.0.0.3/index.html
-   -- no reply by s1 url omitting (filtering)
-   -- type CTL-C
+   -- no reply by s1 url filtering   (s1 url filtering により応答が返りません)
+   -- type CTL-C                     (CTL-C を押してコマンドを停止してください)
    # curl http://10.0.0.3/hello.html
-   HELLO WORLD!
+   HELLO WORLD! 　　　　　　　　　　　　  (response/応答が返ります)
    # curl http://10.0.0.2/hello.html
-   -- no reply by s1 url omitting (filtering)
-   -- type CTL-C
+   -- no reply by s1 url filtering   (s1 url filtering により応答が返りません)
+   -- type CTL-C                     (CTL-C を押してコマンドを停止してください)
    ```
 
    ```
-   factory-setting omitt URL list ( in include/url.p4 )
+   factory-setting omitt URL list ( in [include/url.p4](include/url.p4) )
+   工場出荷での URL 遮断リストは以下の通りです。( [include/url.p4](include/url.p4)にあります )
 	  http://10.0.0.2/
 	  http://10.0.0.2/hello.html
 	  http://10.0.0.3/index.html
@@ -115,31 +124,45 @@ h1 は Web クライアント、h2,h3 は http server として動作させま�
 
 6. Type `exit` to leave each xterm and the Mininet command line.
    Then, to stop mininet:
+   exit を入力して、各 xterm と mininet コマンドラインを終了します。
    ```bash
    mininet> exit
    $ make stop
    ```
    And to delete all pcaps, build files, and logs:
+   pcap、ビルドファイル、ログを削除するには以下のようにします。
    ```bash
    $ make clean
    ```
 
 
-## Step 3: Edit the filtering URL list
-
-   edit URL list and re-rune url.p4
-
+## Step 3: Edit the filtering URL list (遮断 URL の編集)
+   edit URL list and re-rune url.p4  
+   URLリストを編集してurl.p4を再実行します。
    ```bash
    $ cd include
-   $ vi url.py
-   // generate omitt URL list
+   $ vi url.py                        // edit omitt URL list
    $ python3 url.py > url.p4
    $ cd ..
-   // re-run url.p4
-   $ make stop; make clean; make 
+   $ make stop; make clean; make      // re-run url.p4
    ```
    
-   ```
-   Note: MAX URL Length is 32.
-   ```
+   
+## Points to note (留意事項)
+- URL including HTTP COMMAND(GET,POST,HEAD etc.) and HTTP Version(HTTP/1.1 etc.)  
+  組み込む URL には HTTP コマンド、バージョンが含まれています。
+- MAX URL Length is 32 
+  URL の長さはコマンド、HHTP Version 含めて最大 32 文字です。
+- The P4 Table is entered as a constant in the P4 program instead of being submitted from C-Plane  
+  P4 Table は C-Plane から投入するのではなく、P4 プログラム内に constant でエントリされてます。
+   
+## Future tasks (今後の課題)
+-- [ ] Separation of HTTP Command and Version
+-- [ ] URL length more extension
+-- [ ] Parsing the true TCP option header instead of using varbit
+-- [ ] URL Matching with variable url length
+-- [ ] Multi Host IP (Redundant Web server) support
 
+
+
+   
