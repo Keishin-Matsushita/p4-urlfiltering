@@ -90,7 +90,7 @@ In standard http.server, URL blocking by the s1 switch causes the server to beco
    ```
 
 5. Try sending a request from the web client to each server.
-   web client から各サーバにリクエストを送ってみます。
+   web client から各サーバにリクエストを送ってみます。  
    `Node:h1`
    ```bash
    # curl http://10.0.0.3/
