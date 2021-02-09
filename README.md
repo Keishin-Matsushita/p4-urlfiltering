@@ -26,9 +26,8 @@ $ make
 
 ## Implementing url filtering 
 
-topology.json
 [The topology of the driving environment is as follows.](topology.json)
-走行環境のトポロジーは以下となります。
+[走行環境のトポロジーは以下となります。](topology.json)
 run h1 as a web client and h2 and h3 as an http server.
 h1 は Web クライアント、h2,h3 は http server として動作させます。
 
