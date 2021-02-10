@@ -57,19 +57,19 @@ In standard http.server, URL blocking by the s1 switch causes the server to beco
    ```
 
 2. You should now see a Mininet command prompt. Try to ping between  
-   hosts in the topology:
+   hosts in the topology:  
    Mininetコマンドプロンプトが表示されます。 ホスト間で ping を実行してみてください。
    ```bash
    mininet> h1 ping h2
    mininet> pingall
    ```
 
-3. Type `xterm` to run the http server.
+3. Type `xterm` to run the http server.  
    http server を動かすために、xterm を起動します。
    ```bash
    mininet> xterm h2 h3
    ```
-   Web Server runs on each terminal as follows.  
+   Web Server runs on each terminal as follows.    
    Web Server は各端末で以下のように実行します。
   
    Node:h2
@@ -83,13 +83,13 @@ In standard http.server, URL blocking by the s1 switch causes the server to beco
    ```
 
 
-4. Type `xterm` to run the web client.
+4. Type `xterm` to run the web client.  
    web client を動かすために、xterm を起動します。
    ```bash
    mininet> xterm h1
    ```
 
-5. Try sending a request from the web client to each server.
+5. Try sending a request from the web client to each server.  
    web client から各サーバにリクエストを送ってみます。  
    `Node:h1`
    ```bash
@@ -118,13 +118,13 @@ In standard http.server, URL blocking by the s1 switch causes the server to beco
 
 
 6. Type `exit` to leave each xterm and the Mininet command line.
-   Then, to stop mininet:
+   Then, to stop mininet:  
    exit を入力して、各 xterm と mininet コマンドラインを終了します。
    ```bash
    mininet> exit
    $ make stop
    ```
-   And to delete all pcaps, build files, and logs:
+   And to delete all pcaps, build files, and logs:  
    pcap、ビルドファイル、ログを削除するには以下のようにします。
    ```bash
    $ make clean
