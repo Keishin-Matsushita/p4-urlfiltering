@@ -144,28 +144,33 @@ In standard http.server, URL blocking by the s1 switch causes the server to beco
    
    
 ## Points to note (留意事項)
-- URL including HTTP COMMAND(GET,POST,HEAD etc.) and HTTP Version(HTTP/1.1 etc.)  
-  組み込む URL には HTTP コマンド、バージョンが含まれています。
+- ~~URL including HTTP COMMAND(GET,POST,HEAD etc.) and HTTP Version(HTTP/1.1 etc.)~~  
+  ~~組み込む URL には HTTP コマンド、バージョンが含まれています。~~
+- URL is URI ( http://10.0.0.1/index.html : URI = /index.html )  
+  URL は URL 中の URI 部分のみとなりました。  
+- The part after the hash(#,?) of the URL is ignored by the table search.  
+  URL のハッシュ以降の部分はテーブル検索からは無視されます。  
 - MAX URL Length is 32  
-  URL の長さはコマンド、バージョン含めて最大 32 文字です。
+  URL の長さは最大 32 文字です。
 - The P4 Table is entered as a constant in the P4 program instead of being submitted from C-Plane  
   P4 Table は C-Plane から投入するのではなく、P4 プログラム内に constant でエントリされてます。
    
 ## Future tasks (今後の課題)
-- [ ] Separation of HTTP Command and Version
+- [x] Separation of HTTP Command and Version
 - [ ] URL length more extension
 - [ ] Parsing the true TCP option header instead of using varbit
 - [ ] URL Matching with variable url length
 - [ ] URL port address supporting 
 - [ ] Multi Host IP (Redundant Web server) support
 - [ ] Input of match URL Source with P4-Runtime
-- [ ] Separate support for URL hash tags (#/? etc.)
+- [x] Separate support for URL hash tags (#/? etc.)
 - [ ] Learning drop url then block all subsequent packets
 - [ ] Redirect URL (stepping stone) block
 - [ ] URL table lpm matching support
 - [ ] Send close to server/response HTTP 404 to client with matching block URL
 
 ## Revision history  (改定履歴)
-- 2021/02/10 first release
+- 2021/02/10 Rev0.00 first release
+- 2021_02/11 Rev0.01 URL equal URI. URL Hash Tag is ignore
 
    
