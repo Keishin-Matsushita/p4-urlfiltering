@@ -177,7 +177,7 @@ parser UrlParser(
     {
         packet.extract(hdr.ethernet);
         transition select(hdr.ethernet.etherType) 
-	    {
+　　　　　{
             TYPE_ARP:  parse_arp;
             TYPE_IPV4: parse_ipv4;
             default: accept;
@@ -194,7 +194,7 @@ parser UrlParser(
     {
         packet.extract(hdr.ipv4);
         transition select(hdr.ipv4.protocol)
-	    {
+　　　　　{
             TYPE_TCP: parse_tcp;
             default: accept;
         }
@@ -204,15 +204,15 @@ parser UrlParser(
     {
         packet.extract(hdr.tcp);
         transition select(hdr.tcp.dataOffset)
-	    {
-	        5: parse_tcp_port;
-	        default: parse_tcp_option;
-	    }
+　　　　　{
+            5: parse_tcp_port;
+            default: parse_tcp_option;
+	}
     }
 
     state parse_tcp_option
     {
-	    bit<32> opt_size = ((bit<32>)hdr.tcp.dataOffset) * 32 - 160;
+        bit<32> opt_size = ((bit<32>)hdr.tcp.dataOffset) * 32 - 160;
         packet.extract(hdr.tcp_opt,opt_size);
         transition parse_tcp_port;
     }
@@ -220,8 +220,8 @@ parser UrlParser(
     state parse_tcp_port
     {
         transition select(hdr.tcp.dstPort)
-	    {
-	        // PARSE TARGET DST PORT
+        {
+	    // PARSE TARGET DST PORT
             80:  parse_http_init;
             445: parse_http_init;
             8000:  parse_http_init;
@@ -232,28 +232,28 @@ parser UrlParser(
     // CLEAR URL DATA 0 FILLING
     state parse_http_init
     {
-	    // INITIALZIE http url info
-	    meta.proto_len     = 0;
-	    meta.proto_sep_len = 0;
-	    meta.url_len       = 0;
-	    meta.url_tag_len   = 0;
-	    meta.url_sep_len   = 0;
-	    meta.version_len   = 0;
+	// INITIALZIE http url info
+	meta.proto_len     = 0;
+	meta.proto_sep_len = 0;
+	meta.url_len       = 0;
+	meta.url_tag_len   = 0;
+	meta.url_sep_len   = 0;
+	meta.version_len   = 0;
     	meta.url_isvalid   = 0;
 
-		zerofill10(hdr.http_proto,0);
-		zerofill10(hdr.http_proto_sep,0);
+	zerofill10(hdr.http_proto,0);
+	zerofill10(hdr.http_proto_sep,0);
 
-		zerofill30(hdr.http_url,0);
-		zerofill(hdr.http_url,30);
-		zerofill(hdr.http_url,31);
+	zerofill30(hdr.http_url,0);
+	zerofill(hdr.http_url,30);
+	zerofill(hdr.http_url,31);
 
-		zerofill30(hdr.http_url_tag,0);
-		zerofill(hdr.http_url_tag,30);
-		zerofill(hdr.http_url_tag,31);
+	zerofill30(hdr.http_url_tag,0);
+	zerofill(hdr.http_url_tag,30);
+	zerofill(hdr.http_url_tag,31);
 
-		zerofill10(hdr.http_url_sep,0);
-		zerofill10(hdr.http_version,0);
+	zerofill10(hdr.http_url_sep,0);
+	zerofill10(hdr.http_version,0);
 
         transition parse_http_proto;
     }
@@ -261,10 +261,10 @@ parser UrlParser(
     // PARSE HTTP PROTO STRING
     state parse_http_proto
     {
-	    packet.extract(hdr.http_proto.next);
-	    meta.proto_len = meta.proto_len + 1;
-	    char_t ch = packet.lookahead<char_t>();
-		transition select(ch.ch)
+	packet.extract(hdr.http_proto.next);
+	meta.proto_len = meta.proto_len + 1;
+	char_t ch = packet.lookahead<char_t>();
+	transition select(ch.ch)
         {
             0x20: parse_http_proto_sep;
             default: parse_http_proto;
@@ -274,10 +274,10 @@ parser UrlParser(
     // PARSE SEPARATER BETWEEN PROTO URL
     state parse_http_proto_sep
     {
-	    packet.extract(hdr.http_proto_sep.next);
-	    meta.proto_sep_len = meta.proto_sep_len + 1;
-	    char_t ch = packet.lookahead<char_t>();
-		transition select(ch.ch)
+	packet.extract(hdr.http_proto_sep.next);
+	meta.proto_sep_len = meta.proto_sep_len + 1;
+	char_t ch = packet.lookahead<char_t>();
+	transition select(ch.ch)
         {
             0x20: parse_http_proto_sep;
             default: parse_http_url;
@@ -287,39 +287,39 @@ parser UrlParser(
     // PARSE URL STRING
     state parse_http_url
     {
-	    packet.extract(hdr.http_url.next);
-	    meta.url_len = meta.url_len + 1;
+	packet.extract(hdr.http_url.next);
+	meta.url_len = meta.url_len + 1;
     	meta.url_isvalid = 1;
-	    char_t ch = packet.lookahead<char_t>();
+	char_t ch = packet.lookahead<char_t>();
         transition select(ch.ch)
-	    {
-	        0x20: parse_http_url_sep; // SPACE
-	        0x23: parse_http_url_tag; // '#' 
-	        0x3f: parse_http_url_tag; // '?' 
+	{
+	    0x20: parse_http_url_sep; // SPACE
+	    0x23: parse_http_url_tag; // '#' 
+	    0x3f: parse_http_url_tag; // '?' 
             default: parse_http_url;
-	    }
+	}
     }
 
     // PARSE URL TAG STRING
     state parse_http_url_tag
     {
-	    packet.extract(hdr.http_url_tag.next);
-	    meta.url_tag_len = meta.url_tag_len + 1;
-	    char_t ch = packet.lookahead<char_t>();
+	packet.extract(hdr.http_url_tag.next);
+	meta.url_tag_len = meta.url_tag_len + 1;
+	char_t ch = packet.lookahead<char_t>();
         transition select(ch.ch)
-	    {
-	        0x20: parse_http_url_sep; // SPACE
+	{
+	    0x20: parse_http_url_sep; // SPACE
             default: parse_http_url_tag;
-	    }
+	}
     }
 
     // PARSE SEPARATER BETWEEN URL VERSION
     state parse_http_url_sep
     {
-	    packet.extract(hdr.http_url_sep.next);
-	    meta.url_sep_len = meta.url_sep_len + 1;
-	    char_t ch = packet.lookahead<char_t>();
-		transition select(ch.ch)
+	packet.extract(hdr.http_url_sep.next);
+	meta.url_sep_len = meta.url_sep_len + 1;
+	char_t ch = packet.lookahead<char_t>();
+	transition select(ch.ch)
         {
             0x20: parse_http_url_sep;
             default: parse_http_version;
@@ -329,15 +329,15 @@ parser UrlParser(
     // PARSE VERSION STRING
     state parse_http_version
     {
-	    packet.extract(hdr.http_version.next);
-	    char_t ch = packet.lookahead<char_t>();
-	    meta.version_len = meta.version_len + 1;
+	packet.extract(hdr.http_version.next);
+	char_t ch = packet.lookahead<char_t>();
+	meta.version_len = meta.version_len + 1;
         transition select(ch.ch)
-	    {
-	        0x0d: accept; // CR
-	        0x0a: accept; // LF
+	{
+	    0x0d: accept; // CR
+	    0x0a: accept; // LF
             default: parse_http_version;
-	    }
+	}
     }
 
 }
@@ -365,7 +365,7 @@ control UrlIngress(
     // PACKET MULTICASTING
     action act_multicast()
     {
-	    standard_metadata.mcast_grp = 1;
+	standard_metadata.mcast_grp = 1;
     }
 
     // PACKET FORWARD PORT SETTING
@@ -377,27 +377,27 @@ control UrlIngress(
     // PACKET FORWARD PORT SETTING
     table tbl_port 
     {
-   	    key = 
-	    { 
-	        // CHECK DISTINATION IP ADDR
+   	key = 
+	{ 
+	    // CHECK DISTINATION IP ADDR
             hdr.ipv4.dstAddr: exact;
-	    }
-	    actions =
-	    {
-	        act_port_fwd;
-	        NoAction;
-	    }
+	}
+	actions =
+	{
+	    act_port_fwd;
+	    NoAction;
+	}
         default_action = NoAction();
 
-	    // 10.0.0.1 -> port(1)
-	    // 10.0.0.2 -> port(2)
-	    // 10.0.0.3 -> port(3)
-	    const entries =
-	    {
-	        (0x0a000001): act_port_fwd(1);
-	        (0x0a000002): act_port_fwd(2);
-	        (0x0a000003): act_port_fwd(3);
-	    }
+	// 10.0.0.1 -> port(1)
+	// 10.0.0.2 -> port(2)
+	// 10.0.0.3 -> port(3)
+	const entries =
+	{
+	    (0x0a000001): act_port_fwd(1);
+	    (0x0a000002): act_port_fwd(2);
+	    (0x0a000003): act_port_fwd(3);
+	}
     }
 
     // URL MATCHED TO DROP 
@@ -409,45 +409,45 @@ control UrlIngress(
     // URL MATCHING
     table tbl_http_url
     {
-	    key =
-	    {
-	        // URL MATCH KEY
-			hdr.ipv4.dstAddr: exact;
-			keydef30(exact,hdr.http_url,0);
-			keydef(exact,hdr.http_url,30);
-			keydef(exact,hdr.http_url,31);
-	    }
-	    actions =
-	    {
-	        act_http_url_match;
-	        NoAction;
-	    }
+	key =
+	{
+	    // URL MATCH KEY
+	    hdr.ipv4.dstAddr: exact;
+	    keydef30(exact,hdr.http_url,0);
+	    keydef(exact,hdr.http_url,30);
+	    keydef(exact,hdr.http_url,31);
+	}
+	actions =
+	{
+            act_http_url_match;
+	    NoAction;
+	}
         default_action = NoAction();
 
-	    // URL MATCH DATA
-	    const entries = {
+	// URL MATCH DATA
+	const entries = {
 #include "include/url.p4"
-	    }
+	}
     }
 
     apply 
     {
-	    if( hdr.arp.isValid() )
-	    {
-	        // IF ARP THEN MULTICASTING
-	        act_multicast();
-	    }
-	    else if( hdr.ipv4.isValid() )
-	    {
-	        // IP PACKET PORT SETTING BY DST IP ADDR
-	        tbl_port.apply();
+	if( hdr.arp.isValid() )
+	{
+	    // IF ARP THEN MULTICASTING
+	    act_multicast();
+	}
+	else if( hdr.ipv4.isValid() )
+	{
+	    // IP PACKET PORT SETTING BY DST IP ADDR
+	    tbl_port.apply();
 
             if( meta.url_isvalid == 1 )
-	        {
-	            // IF HTTP URL PACKET MATCH TABLE APPLY
-		        tbl_http_url.apply();
+	    {
+	        // IF HTTP URL PACKET MATCH TABLE APPLY
+		tbl_http_url.apply();
             }
-	    }
+	}
     }
 }
 
@@ -472,9 +472,9 @@ control UrlEgress(
     {
         // Prune multicast packet to ingress port to preventing loop
         if( standard_metadata.egress_port == standard_metadata.ingress_port )
-	    {
+	{
             drop();
-	    }
+	}
     }
 }
 
