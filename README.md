@@ -162,7 +162,8 @@ In standard http.server, URL blocking by the s1 switch causes the server to beco
 - [ ] Separate support for URL hash tags (#/? etc.)
 - [ ] learning drop url then block all subsequent packets
 - [ ] Redirect URL (stepping stone) block
-- [ ] URL table lpm matching support 
+- [ ] URL table lpm matching support
+- [ ] return HTTP 404 with matching block URL
 
 ## Revision history  (改定履歴)
 - 2021/02/10 first release
