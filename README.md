@@ -161,6 +161,7 @@ In standard http.server, URL blocking by the s1 switch causes the server to beco
 - [ ] Input of match URL Source with P4-Runtime
 - [ ] Separate support for URL hash tags (#/? etc.)
 - [ ] learning drop url then lock all subsequent packets
+- [ ] Redirect URL (stepping stone) block
 
 ## Revision history  (改定履歴)
 - 2021/02/10 first release
