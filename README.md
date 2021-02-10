@@ -4,7 +4,7 @@ P4言語で実現する url フィルタリング
 
 
 ```bash
-P4 version 16 SEP 2020.    P4 のバージョンは 2020/08/16 となります。
+P4 version 16 SEP 2020.    P4 のバージョンは 2020/09/16 となります。
 Ubuntu 16.04 TLS P4 tutorial VM   P4 チュートリアルで作成する Ubuntu 16.04TLS VM で動作します。
 VirtualBox VM from https://github.com/p4lang/tutorials
 VM の作成方法は上記 URL を参照してください。
@@ -132,7 +132,7 @@ In standard http.server, URL blocking by the s1 switch causes the server to beco
 
 
 ## Step 3: Edit the filtering URL list (遮断 URL の編集)
-   edit URL list and re-rune url.p4  
+   edit URL list and re-run url.p4  
    URLリストを編集してurl.p4を再実行します。
    ```bash
    $ cd include
