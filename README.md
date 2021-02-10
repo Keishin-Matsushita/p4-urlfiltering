@@ -171,6 +171,6 @@ In standard http.server, URL blocking by the s1 switch causes the server to beco
 
 ## Revision history  (改定履歴)
 - 2021/02/10 Rev0.00 first release
-- :triangular_flag_on_post:　2021/02/11 Rev0.01 URL equal URI. URL Hash Tag is ignore
+- :triangular_flag_on_post:　2021/02/11 Rev0.01 URL equal URI. URL Hash Tag ignore
 
    
