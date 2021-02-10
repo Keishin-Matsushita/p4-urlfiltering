@@ -3,7 +3,7 @@ web url filtering by p4 language
 P4言語で実現する url フィルタリング
 
 P4 version 16 SEP 2020.    P4 のバージョンは 2020/09/16 となります。  
-Ubuntu 16.04 TLS P4 tutorial VM   P4 チュートリアルで作成する Ubuntu 16.04TLS VM で動作します。  
+Ubuntu 16.04 LTS P4 tutorial VM   P4 チュートリアルで作成する Ubuntu 16.04 LTS VM で動作します。  
 VirtualBox VM from https://github.com/p4lang/tutorials  
 VM の作成方法は上記 URL を参照してください。  
 under run into P4 Development Environment   P4 開発環境の配下で動作します。  
