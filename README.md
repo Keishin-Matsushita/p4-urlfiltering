@@ -160,7 +160,7 @@ In standard http.server, URL blocking by the s1 switch causes the server to beco
 - [ ] Multi Host IP (Redundant Web server) support
 - [ ] Input of match URL Source with P4-Runtime
 - [ ] Separate support for URL hash tags (#/? etc.)
-- [ ] learning drop url then lock all subsequent packets
+- [ ] learning drop url then block all subsequent packets
 - [ ] Redirect URL (stepping stone) block
 
 ## Revision history  (改定履歴)
