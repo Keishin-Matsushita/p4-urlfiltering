@@ -146,7 +146,7 @@ In standard http.server, URL blocking by the s1 switch causes the server to beco
 ## Points to note (留意事項)
 - ~~URL including HTTP COMMAND(GET,POST,HEAD etc.) and HTTP Version(HTTP/1.1 etc.)~~  
   ~~組み込む URL には HTTP コマンド、バージョンが含まれています。~~
-- URL is URI ( http://10.0.0.1/index.html : URI = /index.html )  
+- URL is URI ( http://10.0.0.1/index.html#1234 : URI = /index.html )  
   URL は URL 中の URI 部分のみとなりました。  
 - The part after the hash(#,?) of the URL is ignored by the table search.  
   URL のハッシュ以降の部分はテーブル検索からは無視されます。  
