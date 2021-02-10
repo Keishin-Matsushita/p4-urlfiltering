@@ -163,7 +163,7 @@ In standard http.server, URL blocking by the s1 switch causes the server to beco
 - [ ] Learning drop url then block all subsequent packets
 - [ ] Redirect URL (stepping stone) block
 - [ ] URL table lpm matching support
-- [ ] Send response HTTP 404 with matching block URL
+- [ ] Send close to server/response HTTP 404 to client with matching block URL
 
 ## Revision history  (改定履歴)
 - 2021/02/10 first release
