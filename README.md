@@ -159,7 +159,8 @@ In standard http.server, URL blocking by the s1 switch causes the server to beco
 - [ ] URL port address supporting 
 - [ ] Multi Host IP (Redundant Web server) support
 - [ ] Input of match URL Source with P4-Runtime
-
+- [ ] Separate support for URL hash tags (#/? etc.)
+- [ ] learning drop url then lock all subsequent packets
 
 ## Revision history  (改定履歴)
 - 2021/02/10 first release
