@@ -146,10 +146,10 @@ In standard http.server, URL blocking by the s1 switch causes the server to beco
 ## Points to note (留意事項)
 - :wastebasket:　~~URL including HTTP COMMAND(GET,POST,HEAD etc.) and HTTP Version(HTTP/1.1 etc.)~~  
   :wastebasket:　~~組み込む URL には HTTP コマンド、バージョンが含まれています。~~  
-- :new:　URL is URI ( http://10.0.0.1/index.html#1234 : URI = /index.html )  
-  :new:　URL は URL 中の URI 部分のみとなりました。  
-- :new:　The part after the hash(#,?) of the URL is ignored by the table search.  
-  :new:　URL のハッシュ以降の部分はテーブル検索からは無視されます。  
+- :triangular_flag_on_post:　URL is URI ( http://10.0.0.1/index.html#1234 : URI = /index.html )  
+  :triangular_flag_on_post:　URL は URL 中の URI 部分のみとなりました。  
+- :triangular_flag_on_post:　The part after the hash(#,?) of the URL is ignored by the table search.  
+  :triangular_flag_on_post:　URL のハッシュ以降の部分はテーブル検索からは無視されます。  
 - MAX URL Length is 32  
   URL の長さは最大 32 文字です。
 - The P4 Table is entered as a constant in the P4 program instead of being submitted from C-Plane  
@@ -171,6 +171,6 @@ In standard http.server, URL blocking by the s1 switch causes the server to beco
 
 ## Revision history  (改定履歴)
 - 2021/02/10 Rev0.00 first release
-- :new:　2021/02/11 Rev0.01 URL equal URI. URL Hash Tag is ignore
+- :triangular_flag_on_post:　2021/02/11 Rev0.01 URL equal URI. URL Hash Tag is ignore
 
    
