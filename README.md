@@ -15,7 +15,7 @@ VirtualBox VM from https://github.com/p4lang/tutorials
 under run into P4 Development Environment.    
 利用する P4 バージョンは 2020/09/16 となります。  
 P4 チュートリアルで作成する Ubuntu 16.04 LTS VM で動作します。   
-VM の作成方法は https://github.com/p4lang/tutorials を参照してください。
+VM の作成方法は https://github.com/p4lang/tutorials を参照してください。  
 P4 開発環境下で動作します。  
  
 ## Install インストール方法
