@@ -46,6 +46,7 @@ The procedure for installation and running is as follows:
 |URL Length Max(最大長)         |32 ascii (32 アスキー文字)                             |              |
 |URL Match Kind(検索方式)       |exact (完全一致)、lpm (longest prefix match) (前方一致) |Rev 0.011     |
 |URL Hash tag support          |Hash Tag(#,?) separation (ハッシュタグ分離)            |Rev 0.010      |
+|URL port support (ポート別 URL) |Supports blocking individual ports in URLs          |Rev 0.011     |
 |Block URL input(遮断 URL 投入) |In program constant (P4 プログラム内)                  |              |
 
 *Specifications are subject to change without notice.  
@@ -209,12 +210,12 @@ h1 は Web クライアント、h2,h3 は http server として動作させま�
 - [x] *Separation of HTTP Command and Version*
 - [x] *Separate support for URL hash tags (#/? etc.)*
 - [x] *URL table lpm matching support*
+- [x] *URL port address supporting* 
 
 ## Future tasks (今後の課題)
 - [ ] URL length more extension
 - [ ] Parsing the true TCP option header instead of using varbit
 - [ ] URL Matching with variable url length
-- [ ] URL port address supporting 
 - [ ] Multi Host IP (Redundant Web server) support
 - [ ] Input of match URL Source with P4-Runtime
 - [ ] Learning drop url then block all subsequent packets
@@ -224,6 +225,6 @@ h1 は Web クライアント、h2,h3 は http server として動作させま�
 ## Revision history  (改定履歴)
 - 2021/02/10 Rev0.000 first release
 - 2021/02/11 Rev0.010 URL equal URI. URL Hash Tag ignore
-- :triangular_flag_on_post:　2021/02/11 Rev0.011 URL lpm support
+- :triangular_flag_on_post:　2021/02/11 Rev0.011 URL lpm, URL port support
 
    
