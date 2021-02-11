@@ -41,7 +41,7 @@ The procedure for installation and running is as follows:
 
 |項目                          |内容                                                  |備考   |
 |:----------------------------|:-----------------------------------------------------|:-------|
-|URL Length Max(最大長)         |32 文字(ascii)                                       |        |
+|URL Length Max(最大長)         |32 ascii (32 アスキー文字)                             |        |
 |URL Match Kind(検索方式)       |exact (完全一致)、lpm (longest prefix match) (前方一致) |        |
 |URL Hash tag support          |Hash Tag(#,?) separation (ハッシュタグ分離)            |        |
 |Block URL input(遮断 URL 投入) |In program constant (P4 プログラム内)                  |        |
