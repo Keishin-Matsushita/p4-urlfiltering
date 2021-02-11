@@ -179,9 +179,9 @@ In standard http.server, URL blocking by the s1 switch causes the server to beco
   P4 Table は C-Plane から投入するのではなく、P4 プログラム内に constant でエントリされてます。
    
 ## Future tasks (今後の課題)
-- [x] *Separation of HTTP Command and Version*
-- [x] *Separate support for URL hash tags (#/? etc.)*
-- [x] *URL table lpm matching support*
+- [x] **Separation of HTTP Command and Version**
+- [x] **Separate support for URL hash tags (#/? etc.)**
+- [x] **URL table lpm matching support**
 - [ ] URL length more extension
 - [ ] Parsing the true TCP option header instead of using varbit
 - [ ] URL Matching with variable url length
