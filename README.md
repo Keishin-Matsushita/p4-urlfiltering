@@ -192,6 +192,8 @@ In standard http.server, URL blocking by the s1 switch causes the server to beco
 - [x] URL table lpm matching support
 - [ ] Send close to server/response HTTP 404 to client with matching block URL
 
+Checked represents the resolved issue. チェック済は解決した課題を表します。  
+
 ## Revision history  (改定履歴)
 - 2021/02/10 Rev0.00 first release
 - 2021/02/11 Rev0.01 URL equal URI. URL Hash Tag ignore
