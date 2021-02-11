@@ -102,7 +102,7 @@ In standard http.server, URL blocking by the s1 switch causes the server to beco
    -- no reply by s1 url filtering   (s1 url filtering により応答が返りません)
    -- type CTL-C                     (CTL-C を押してコマンドを停止してください)
    # curl http://10.0.0.3/hello2.html
-   HELLO WORLD! 　　　　　　　　　　　　  (response/応答が返ります)
+   HELLO WORLD 2! 　　　　　　　　　　　　  (response/応答が返ります)
    # curl http://10.0.0.2/include/url_lpm.p4
    -- no reply by s1 url filtering   (s1 url filtering により応答が返りません)
    -- type CTL-C                     (CTL-C を押してコマンドを停止してください)
