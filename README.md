@@ -176,8 +176,8 @@ h1 は Web クライアント、h2,h3 は http server として動作させま�
    The URL determined by this will be a drop.  
    
    URL 検索は完全一致(EXACT)と前方一致(LPM)があります。  
-   `url.py` は完全一致,及び前方一致 URL リスト、及び裁可する IP アドレス、TCP ポートのリストを作成します。   
-   これににより判定された URL はドロップになります。 
+   `url.py` は完全一致、前方一致 URL リスト、及び裁可する IP アドレス、TCP ポートのリストを作成します。   
+   これにより判定された URL はドロップになります。 
    
    - LPM (longest prefix match)  
    A prefix match means that the URI matches all the targets to be searched from the prefix.   
