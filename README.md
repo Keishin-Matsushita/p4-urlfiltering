@@ -3,9 +3,9 @@ web url filtering by p4 language
 P4言語で実現する url フィルタリング
 
 When a client sends an http request to the server, the switch filters and blocks the URL.  
-The switch compares and determines the IP address and URI, and drops the packet if it becomes a target.    
+The switch compares and determines the IP address,port and URI, and drops the packet if it becomes a target.    
 クライアントからサーバに http リクエストを送った時に、スイッチにより URL をフィルタリングし遮断します。  
-スイッチでは IP アドレス、および URI を比較し判別、対象となった場合にはパケットをドロップします。  
+スイッチでは IP アドレス、ポートおよび URI を比較し判別、対象となった場合にはパケットをドロップします。  
 
 ## Running conditions 動作条件
 
