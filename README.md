@@ -45,7 +45,7 @@ The procedure for installation and running is as follows:
 |:----------------------------|:-----------------------------------------------------|:-------------|
 |Support P4 language (P4 言語) | P4_16 (16 SEP 2020) v1model Behavior Model           |              |
 |URL Length Max(最大長)         |32 ascii (32 アスキー文字)                             |              |
-|URL Match Kind(検索方式)       |exact (完全一致)、lpm (longest prefix match) (前方一致) |Rev 0.011     |
+|URL Match Kind(検索方式)       |exact (完全一致)</br>lpm (longest prefix match) (前方一致) |Rev 0.011     |
 |URL Hash tag support          |Hash Tag(#,?) separation (ハッシュタグ分離)            |Rev 0.010      |
 |URL port support (ポート別 URL) |Supports blocking individual ports in URLs          |Rev 0.011     |
 |Block URL input(遮断 URL 投入) |In program constant (P4 プログラム内)                  |              |
