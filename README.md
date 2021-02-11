@@ -128,7 +128,7 @@ h1 は Web クライアント、h2,h3 は http server として動作させま�
    -- type CTL-C                     (CTL-C を押してコマンドを停止してください)
    
    # curl http://10.0.0.3/hello2.html
-   HELLO WORLD 2! 　　　　　　　　　　　　  (response/応答が返ります)
+   HELLO WORLD 2! 　　　　　　　　　　　 (response/応答が返ります)
    
    # curl http://10.0.0.2/include/url_lpm.p4
    -- no reply by s1 url filtering   (s1 url filtering により応答が返りません)
