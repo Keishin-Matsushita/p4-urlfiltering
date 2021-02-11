@@ -2,10 +2,10 @@
 web url filtering by p4 language  
 P4言語で実現する url フィルタリング
 
-When a client sends an http request to the server, the switch filters and blocks the URL.
-The switch compares and determines the IP address and URI, and drops the packet if it becomes a target.  
-クライアントからサーバに http リクエストを送った時に、スイッチにより URL をフィルタリングし遮断します。
-スイッチでは IP アドレス、および URI を比較し判別、対象となった場合にはパケットをドロップします。
+When a client sends an http request to the server, the switch filters and blocks the URL.  
+The switch compares and determines the IP address and URI, and drops the packet if it becomes a target.    
+クライアントからサーバに http リクエストを送った時に、スイッチにより URL をフィルタリングし遮断します。  
+スイッチでは IP アドレス、および URI を比較し判別、対象となった場合にはパケットをドロップします。  
 
 
 ## Operating conditions 動作条件
@@ -37,7 +37,7 @@ The procedure for installation and running is as follows:
    $ make
    ```
 
-## specification
+## Specification (仕様)
 
 |　項目                      |　内容                                                 | 備考   |
 |:--------------------------|:-----------------------------------------------------|:-------|
