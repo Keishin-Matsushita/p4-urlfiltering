@@ -171,12 +171,12 @@ h1 は Web クライアント、h2,h3 は http server として動作させま�
    $ cd ..
    $ make stop; make clean; make      // re-run url.p4
    ```
-   :triangular_flag_on_post:  See include/url.py for more details.  
+   :triangular_flag_on_post:  See [url.py](include/url.py) for more details.  
    URL searches include exact matches(EXACT) and long prefix matches(LPM).    
    `url.py` is generate exactly,lpm match url list and check IP Address and TCP ports list.  
    The URL determined by this will be a drop.  
    
-   詳細は include/url.py を参照してください。  
+   詳細は [url.py](include/url.py) を参照してください。  
    URL 検索は完全一致(EXACT)と前方一致(LPM)があります。  
    `url.py` は完全一致、前方一致 URL リスト、及び裁可する IP アドレス、TCP ポートのリストを作成します。   
    これにより判定された URL はドロップになります。 
