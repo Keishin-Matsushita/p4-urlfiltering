@@ -141,8 +141,8 @@ h1 は Web クライアント、h2,h3 は http server として動作させま�
    工場出荷での URL 遮断リストは以下の通りです。( include/url_exact.p4,url_lpm.p4 にあります )
 	  exact http://10.0.0.2/index.html
 	  exact http://10.0.0.3/hello.html
-	  exact http://10.0.0.3/index.html
 	  lpm   http://10.0.0.2/include/
+	  lpm   http://10.0.0.2/set/
    ```
 
 
