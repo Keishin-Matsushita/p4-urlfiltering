@@ -527,9 +527,7 @@ control UrlIngress(
         default_action = NoAction();
 
         // URL MATCH DATA
-        const entries = {
 #include "include/url_exact.p4"
-        }
     }
 
     // URL LPM MATCHING
@@ -550,9 +548,7 @@ control UrlIngress(
         default_action = NoAction();
 
         // URL MATCH DATA
-        const entries = {
 #include "include/url_lpm.p4"
-        }
     }
 
 
