@@ -226,6 +226,6 @@ h1 は Web クライアント、h2,h3 は http server として動作させま�
 ## Revision history  (改定履歴)
 - 2021/02/10 Rev0.000 first release
 - 2021/02/11 Rev0.010 URL equal URI. URL Hash Tag ignore
-- :triangular_flag_on_post:　2021/02/11 Rev0.011 URL lpm, URL port support
+- :triangular_flag_on_post:　2021/02/11 Rev0.011 URL lpm match, URL port support
 
    
