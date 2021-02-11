@@ -158,7 +158,7 @@ In standard http.server, URL blocking by the s1 switch causes the server to beco
    - LPM (longest prefix match)  
    A prefix match means that the URI matches all the targets to be searched from the prefix.   
    前方一致とは URI が前方から検索すべき対象にすべて一致することを表します。    
-   LPM: http://10.0.0.2/include/  
+   LPM: http://10.0.0.2/include
    http://10.0.0.2/include/　　　　　　match(一致)  
    http://10.0.0.2/include/url.p4　　match(一致)  
    http://10.0.0.2/include/subdir/　　match(一致)  
