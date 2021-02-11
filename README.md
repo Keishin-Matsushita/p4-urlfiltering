@@ -1,20 +1,25 @@
 # p4-urlfiltering　rev0.011
 web url filtering by p4 language  
 P4言語で実現する url フィルタリング
-
+<dl>
+<dd>
 When a client sends an http request to the server, the switch filters and blocks the URL.  
 The switch compares and determines the IP address and URI, and drops the packet if it becomes a target.    
 クライアントからサーバに http リクエストを送った時に、スイッチにより URL をフィルタリングし遮断します。  
 スイッチでは IP アドレス、および URI を比較し判別、対象となった場合にはパケットをドロップします。  
-
+</dd>
+</dd>
 
 ## Running conditions 動作条件
-  P4 version 16 SEP 2020.    P4 のバージョンは 2020/09/16 となります。  
-  Ubuntu 16.04 LTS P4 tutorial VM   P4 チュートリアルで作成する Ubuntu 16.04 LTS VM で動作します。  
-  VirtualBox VM from https://github.com/p4lang/tutorials  
-  VM の作成方法は上記 URL を参照してください。  
-  under run into P4 Development Environment   P4 開発環境の配下で動作します。  
-
+<dl>
+<dd>	
+P4 version 16 SEP 2020.    P4 のバージョンは 2020/09/16 となります。  
+Ubuntu 16.04 LTS P4 tutorial VM   P4 チュートリアルで作成する Ubuntu 16.04 LTS VM で動作します。  
+VirtualBox VM from https://github.com/p4lang/tutorials  
+VM の作成方法は上記 URL を参照してください。  
+under run into P4 Development Environment   P4 開発環境の配下で動作します。  
+</dd>
+</dl>
 
 ## Install インストール方法
 1. install threading http server (スレッド型 http server のインストール)  
@@ -38,7 +43,8 @@ The procedure for installation and running is as follows:
    ```
 
 ## Specification (仕様)
-
+<dl>
+<dd>
 |項目                          |内容                                                  |備考         |
 |:----------------------------|:-----------------------------------------------------|:-----------|
 |URL Length Max(最大長)         |32 ascii (32 アスキー文字)                             |            |
@@ -48,8 +54,8 @@ The procedure for installation and running is as follows:
 
 *Specifications are subject to change without notice.  
 仕様は予告なく変更されます。*  
-
-
+</dd>
+</dl>
 
 ## Implementing url filtering 
 
