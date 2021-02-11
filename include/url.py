@@ -25,22 +25,22 @@ def output( kind,ipaddr,port,url ):
 
     if kind == 'exact':
 
-        exacts.append( '// %s://%s:%d%s' % (scheme,ip,port,url) )
-        exacts.append( '(' )
-        exacts.append( '\t%s,%d,' % (ipaddr,port) )
+        exacts.append( '\t// %s://%s:%d%s' % (scheme,ip,port,url) )
+        exacts.append( '\t(' )
+        exacts.append( '\t\t%s,%d,' % (ipaddr,port) )
         s = '0x'
         for i in range(l):
             s = s + ('%02x' % (ord(url[i])))
         for i in range(32-l):
             s = s + '00'
-        exacts.append( '\t%s' % (s) )
-        exacts.append( '):act_http_url_match();' )
+        exacts.append( '\t\t%s' % (s) )
+        exacts.append( '\t):act_http_url_match();' )
 
     elif kind == 'lpm':
 
-        lpms.append( '// %s://%s:%d%s' % (scheme,ip,port,url) )
-        lpms.append( '(' )
-        lpms.append( '\t%s,%d,' % (ipaddr,port) )
+        lpms.append( '\t// %s://%s:%d%s' % (scheme,ip,port,url) )
+        lpms.append( '\t(' )
+        lpms.append( '\t\t%s,%d,' % (ipaddr,port) )
         s = '0x'
         mask = '0x'
         for i in range(l):
@@ -49,10 +49,10 @@ def output( kind,ipaddr,port,url ):
         for i in range(32-l):
             s = s + '00'
             mask = mask + '00'
-        lpms.append( '\t%s' % (s) )
-        lpms.append( '\t&&&' )
-        lpms.append( '\t%s' % (mask) )
-        lpms.append( '):act_http_url_match();' )
+        lpms.append( '\t\t%s' % (s) )
+        lpms.append( '\t\t&&&' )
+        lpms.append( '\t\t%s' % (mask) )
+        lpms.append( '\t):act_http_url_match();' )
 
 
 
@@ -75,10 +75,16 @@ for ui in range(len(urls)):
 
 
 with open( 'url_exact.p4',mode='w' ) as f:
-    f.write( '\n'.join( exacts ) )
+    if len(exacts) > 0:
+        f.write( 'const entries = {\n' )
+        f.write( '\n'.join( exacts ) )
+        f.write( '\n}\n' )
 
 with open( 'url_lpm.p4',mode='w' ) as f:
-    f.write( '\n'.join( lpms ) )
+    if len(lpms) > 0:
+        f.write( 'const entries = {\n' )
+        f.write( '\n'.join( lpms ) )
+        f.write( '\n}\n' )
 
 with open( 'ports.p4',mode='w' ) as f:
     for (ipaddr,port) in group.keys():
