@@ -46,8 +46,8 @@ The procedure for installation and running is as follows:
 |URL Hash tag support          |Hash Tag(#,?) separation (ハッシュタグ分離)            |        |
 |Block URL input(遮断 URL 投入) |In program constant (P4 プログラム内)                  |        |
 
-Specifications are subject to change without notice.  
-仕様は予告なく変更されます。  
+*Specifications are subject to change without notice.  
+仕様は予告なく変更されます。*  
 
 
 
