@@ -151,18 +151,18 @@ In standard http.server, URL blocking by the s1 switch causes the server to beco
    
    URL 検索は完全一致(EXACT)と前方一致(LPM)があります。  
    `url_exact.py` は完全一致 URL リストを作成します。   
-   `url_lpm.py` は前方一致 URL リストを作成します。 
+   `url_lpm.py` は前方一致 URL リストを作成します。  
    これに完全もしくは前方一致した URL はドロップになります。 
    
    - LPM (longest prefix match)  
    A prefix match means that the URI matches all the targets to be searched from the prefix.   
    前方一致とは URI が前方から検索すべき対象にすべて一致することを表します。    
    LPM: http://10.0.0.2/include/  
-   http://10.0.0.2/include/   　　　 match(一致)  
-   http://10.0.0.2/include/url.p4   match(一致)  
-   http://10.0.0.2/include/subdir/  match(一致)  
-   http://10.0.0.3/include/   　　　 miss(不一致)  
-   http://10.0.0.3/index.html       miss(不一致)  
+   http://10.0.0.2/include/　　　　　　match(一致)  
+   http://10.0.0.2/include/url.p4　　match(一致)  
+   http://10.0.0.2/include/subdir/　　match(一致)  
+   http://10.0.0.3/include/　　　　　　miss(不一致)  
+   http://10.0.0.3/index.html　　　　　miss(不一致)  
      
    
 ## Points to note (留意事項)
