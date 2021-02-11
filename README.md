@@ -95,25 +95,26 @@ In standard http.server, URL blocking by the s1 switch causes the server to beco
    ```bash
    # curl http://10.0.0.3/
    hello index 　　　　　　　　　　　　  (response/応答が返ります)
-   # curl http://10.0.0.2/
+   # curl http://10.0.0.2/index,html
    -- no reply by s1 url filtering　 (s1 url filtering により応答が返りません)
    -- type CTL-C                     (CTL-C を押してコマンドを停止してください)
-   # curl http://10.0.0.3/index.html
+   # curl http://10.0.0.3/hello.html
    -- no reply by s1 url filtering   (s1 url filtering により応答が返りません)
    -- type CTL-C                     (CTL-C を押してコマンドを停止してください)
-   # curl http://10.0.0.3/hello.html
+   # curl http://10.0.0.3/hello2.html
    HELLO WORLD! 　　　　　　　　　　　　  (response/応答が返ります)
-   # curl http://10.0.0.2/hello.html
+   # curl http://10.0.0.2/include/url_lpm.p4
    -- no reply by s1 url filtering   (s1 url filtering により応答が返りません)
    -- type CTL-C                     (CTL-C を押してコマンドを停止してください)
    ```
 
    ```
-   factory-setting omitt URL list ( in include/url.p4 )
-   工場出荷での URL 遮断リストは以下の通りです。( include/url.p4 にあります )
-	  http://10.0.0.2/
-	  http://10.0.0.2/hello.html
-	  http://10.0.0.3/index.html
+   factory-setting omitt URL list ( in include/url_excat.p4,url_lpm.p4 )
+   工場出荷での URL 遮断リストは以下の通りです。( include/url_exact.p4,url_lpm.p4 にあります )
+	  exact http://10.0.0.2/index.html
+	  exact http://10.0.0.3/hello.html
+	  exact http://10.0.0.3/index.html
+	  lpm   http://10.0.0.2/include/
    ```
 
 
