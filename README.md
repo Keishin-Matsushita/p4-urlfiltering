@@ -12,11 +12,11 @@ The switch compares and determines the IP address,port and URI, and drops the pa
 P4 version 16 SEP 2020.      
 Ubuntu 16.04 LTS P4 tutorial VM.   
 VirtualBox VM from https://github.com/p4lang/tutorials  
-under run into P4 BMV Development Environment.    
+under run into P4 Behavior Model Development Environment.    
 利用する P4 バージョンは 2020/09/16 となります。  
 P4 チュートリアルで作成する Ubuntu 16.04 LTS VM で動作します。   
 VM の作成方法は https://github.com/p4lang/tutorials を参照してください。  
-P4 BMV 開発環境下で動作します。  
+P4 Behavior Model 開発環境下で動作します。  
  
 ## Install インストール方法
 1. install threading http server (スレッド型 http server のインストール)  
@@ -43,7 +43,7 @@ The procedure for installation and running is as follows:
 
 |Item (項目)                  |Detail (内容)                                          |Remarks (備考) |
 |:----------------------------|:-----------------------------------------------------|:-------------|
-|Support P4 language (P4 言語) | P4_16 (16 SEP 2020)                                 |              |
+|Support P4 language (P4 言語) | P4_16 (16 SEP 2020) v1model Behavior Model           |              |
 |URL Length Max(最大長)         |32 ascii (32 アスキー文字)                             |              |
 |URL Match Kind(検索方式)       |exact (完全一致)、lpm (longest prefix match) (前方一致) |Rev 0.011     |
 |URL Hash tag support          |Hash Tag(#,?) separation (ハッシュタグ分離)            |Rev 0.010      |
