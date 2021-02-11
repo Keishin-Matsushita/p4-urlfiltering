@@ -38,12 +38,12 @@ The procedure for installation and running is as follows:
 
 ## Specification (仕様)
 
-|項目                          |内容                                                  |備考         |
-|:----------------------------|:-----------------------------------------------------|:-----------|
-|URL Length Max(最大長)         |32 ascii (32 アスキー文字)                             |            |
-|URL Match Kind(検索方式)       |exact (完全一致)、lpm (longest prefix match) (前方一致) |Rev 0.011   |
-|URL Hash tag support          |Hash Tag(#,?) separation (ハッシュタグ分離)            |Rev 0.010   |
-|Block URL input(遮断 URL 投入) |In program constant (P4 プログラム内)                  |            |
+|Item (項目)                  |Detail (内容)                                          |Remarks (備考) |
+|:----------------------------|:-----------------------------------------------------|:-------------|
+|URL Length Max(最大長)         |32 ascii (32 アスキー文字)                             |              |
+|URL Match Kind(検索方式)       |exact (完全一致)、lpm (longest prefix match) (前方一致) |Rev 0.011     |
+|URL Hash tag support          |Hash Tag(#,?) separation (ハッシュタグ分離)            |Rev 0.010      |
+|Block URL input(遮断 URL 投入) |In program constant (P4 プログラム内)                  |              |
 
 *Specifications are subject to change without notice.  
 仕様は予告なく変更されます。*  
