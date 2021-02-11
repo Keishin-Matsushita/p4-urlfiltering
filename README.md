@@ -190,10 +190,10 @@ h1 は Web クライアント、h2,h3 は http server として動作させま�
    http://10.0.0.2/index.html　　　　　miss(不一致)  
      
    - Precautions when editing URL (URL 編集上の注意点)   
-   Currently, at least one URL is required for each exact and lpm list. 
-   If there is no URL in either exact or lpm, url.p4 compilation will fail.
-   現在、exact,lpm リストごとに少なくとも 1 つのURLが必要です。
-   exact,lpm リストにて URL が 1 つもない場合、url.p4 のコンパイルは失敗します。
+   Currently, at least one URL is required for each exact and lpm list.   
+   If there is no URL in either exact or lpm, url.p4 compilation will fail.  
+   現在、exact,lpm リストごとに少なくとも 1 つのURLが必要です。  
+   exact,lpm リストにて URL が 1 つもない場合、url.p4 のコンパイルは失敗します。  
     
 ## Points to note (留意事項)
 - :wastebasket:　~~URL including HTTP COMMAND(GET,POST,HEAD etc.) and HTTP Version(HTTP/1.1 etc.)~~  
