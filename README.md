@@ -188,14 +188,6 @@ h1 は Web クライアント、h2,h3 は http server として動作させま�
    http://10.0.0.2/include/subdir/　　match(一致)  
    http://10.0.0.3/include/　　　　　　miss(不一致)  
    http://10.0.0.2/index.html　　　　　miss(不一致)  
-     
-   - Precautions when editing URL (URL 編集上の注意点)   
-   Currently, at least one URL is required for each exact and lpm list.   
-   If there is no URL in either exact or lpm, url.p4 compilation will fail.  
-   This issue will be fixed in due course.  
-   現在、exact,lpm リストごとに少なくとも 1 つのURLが必要です。  
-   exact,lpm リストにて URL が 1 つもない場合、url.p4 のコンパイルは失敗します。  
-   この問題はいずれ改修します。  
     
 ## Points to note (留意事項)
 - :wastebasket:　~~URL including HTTP COMMAND(GET,POST,HEAD etc.) and HTTP Version(HTTP/1.1 etc.)~~  
@@ -209,6 +201,13 @@ h1 は Web クライアント、h2,h3 は http server として動作させま�
   URL の長さは最大 32 文字です。
 - The URL Table is entered as a constant in the P4 program instead of being submitted from C-Plane  
   URL Table は C-Plane から投入するのではなく、P4 プログラム内に constant でエントリされてます。
+- Precautions when editing URL (URL 編集上の注意点)   
+  Currently, at least one URL is required for each exact and lpm list.   
+  If there is no URL in either exact or lpm, url.p4 compilation will fail.  
+  This issue will be fixed in due course.  
+  現在、exact,lpm リストごとに少なくとも 1 つのURLが必要です。  
+  exact,lpm リストにて URL が 1 つもない場合、url.p4 のコンパイルは失敗します。  
+  この問題はいずれ改修します。 
    
 ## Issues to be solved (解決した課題)
 - [x] *Separation of HTTP Command and Version*
