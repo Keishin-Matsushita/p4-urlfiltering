@@ -26,7 +26,7 @@ In standard http.server, URL blocking by the s1 switch causes the server to beco
    ```
    ... installed python3 lib ComplexHTTPServer
 
-2. install p4-urlfiltering (本件のインストール)
+2. install p4-urlfiltering (本件のインストール)  
 The procedure for installation and running is as follows:  
 インストールと走行は以下の手順となります。
 
