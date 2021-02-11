@@ -197,8 +197,9 @@ h1 は Web クライアント、h2,h3 は http server として動作させま�
 ## Points to note (留意事項)
 - :wastebasket:　~~URL including HTTP COMMAND(GET,POST,HEAD etc.) and HTTP Version(HTTP/1.1 etc.)~~  
   :wastebasket:　~~組み込む URL には HTTP コマンド、バージョンが含まれています。~~  
-- URL is IP Address and URI ( http://10.0.0.1/index.html#1234 : URI = /index.html )  
-  URL は IP アドレス及び URL 中の URI 部分のみとなりました。  
+- It is the IP address TCP port and the URI part in the URL that are determined by the URL.  
+  ( http://10.0.0.1:8000/index.html#1234 : URI = /index.html )  
+  URL で判別するのは IP アドレス TCP ポート及び URL 中の URI 部分となりました。  
 - The part after the hash(#,?) of the URL is ignored by the table search.  
   URL のハッシュ以降の部分は URL 検索からは無視されます。   
 - MAX URL Length is 32  
