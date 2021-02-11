@@ -203,8 +203,8 @@ h1 は Web クライアント、h2,h3 は http server として動作させま�
   URL のハッシュ以降の部分は URL 検索からは無視されます。   
 - MAX URL Length is 32  
   URL の長さは最大 32 文字です。
-- The P4 Table is entered as a constant in the P4 program instead of being submitted from C-Plane  
-  P4 Table は C-Plane から投入するのではなく、P4 プログラム内に constant でエントリされてます。
+- The URL Table is entered as a constant in the P4 program instead of being submitted from C-Plane  
+  URL Table は C-Plane から投入するのではなく、P4 プログラム内に constant でエントリされてます。
    
 ## Issues to be solved (解決した課題)
 - [x] *Separation of HTTP Command and Version*
