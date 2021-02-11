@@ -180,16 +180,16 @@ In standard http.server, URL blocking by the s1 switch causes the server to beco
    
 ## Future tasks (今後の課題)
 - [x] Separation of HTTP Command and Version
+- [x] Separate support for URL hash tags (#/? etc.)
+- [x] URL table lpm matching support
 - [ ] URL length more extension
 - [ ] Parsing the true TCP option header instead of using varbit
 - [ ] URL Matching with variable url length
 - [ ] URL port address supporting 
 - [ ] Multi Host IP (Redundant Web server) support
 - [ ] Input of match URL Source with P4-Runtime
-- [x] Separate support for URL hash tags (#/? etc.)
 - [ ] Learning drop url then block all subsequent packets
 - [ ] Redirect URL (stepping stone) block
-- [x] URL table lpm matching support
 - [ ] Send close to server/response HTTP 404 to client with matching block URL
 
 Checked represents the resolved issue. チェック済は解決した課題を表します。  
