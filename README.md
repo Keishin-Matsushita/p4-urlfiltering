@@ -39,12 +39,12 @@ The procedure for installation and running is as follows:
 
 ## Specification (仕様)
 
-|項目                          |内容                                                  |備考   |
-|:----------------------------|:-----------------------------------------------------|:-------|
-|URL Length Max(最大長)         |32 ascii (32 アスキー文字)                             |        |
-|URL Match Kind(検索方式)       |exact (完全一致)、lpm (longest prefix match) (前方一致) |        |
-|URL Hash tag support          |Hash Tag(#,?) separation (ハッシュタグ分離)            |        |
-|Block URL input(遮断 URL 投入) |In program constant (P4 プログラム内)                  |        |
+|項目                          |内容                                                  |備考         |
+|:----------------------------|:-----------------------------------------------------|-----------:|
+|URL Length Max(最大長)         |32 ascii (32 アスキー文字)                             |Rev 0.000   |
+|URL Match Kind(検索方式)       |exact (完全一致)、lpm (longest prefix match) (前方一致) |Rev 0.011   |
+|URL Hash tag support          |Hash Tag(#,?) separation (ハッシュタグ分離)            |Rev 0.010   |
+|Block URL input(遮断 URL 投入) |In program constant (P4 プログラム内)                  |Rev 0.000   |
 
 *Specifications are subject to change without notice.  
 仕様は予告なく変更されます。*  
@@ -217,8 +217,8 @@ h1 は Web クライアント、h2,h3 は http server として動作させま�
 - [ ] Send close to server/response HTTP 404 to client with matching block URL
 
 ## Revision history  (改定履歴)
-- 2021/02/10 Rev0.00 first release
-- 2021/02/11 Rev0.01 URL equal URI. URL Hash Tag ignore
+- 2021/02/10 Rev0.000 first release
+- 2021/02/11 Rev0.010 URL equal URI. URL Hash Tag ignore
 - :triangular_flag_on_post:　2021/02/11 Rev0.011 URL lpm support
 
    
