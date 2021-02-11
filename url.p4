@@ -65,14 +65,7 @@ header tcp_t
     bit<32> ackNo;
     bit<4>  dataOffset;
     bit<4>  res;
-    bit<1>  cwr;
-    bit<1>  ece;
-    bit<1>  urg;
-    bit<1>  ack;
-    bit<1>  psh;
-    bit<1>  rst;
-    bit<1>  syn;
-    bit<1>  fin;
+    bit<8>  flags;
     bit<16> window;
     bit<16> checksum;
     bit<16> urgentPtr;
@@ -114,6 +107,7 @@ struct metadata
     bit<256>    url;
     bit<256>    ch;
     bit<16>     ch_url_len;
+    bit<8>      mid;
     bit<1>      url_isvalid;
 }
 
@@ -197,6 +191,7 @@ parser UrlParser(
     state parse_ipv4
     {
         packet.extract(hdr.ipv4);
+        meta.url_isvalid = 0;
         transition select(hdr.ipv4.protocol)
         {
             TYPE_TCP: parse_tcp;
@@ -223,12 +218,11 @@ parser UrlParser(
 
     state parse_tcp_port
     {
-        transition select(hdr.tcp.dstPort)
+        bit<8> flags = hdr.tcp.flags & 0x23;
+        transition select(flags,hdr.ipv4.dstAddr,hdr.tcp.dstPort)
         {
             // PARSE TARGET DST PORT
-            80:  parse_http_init;
-            445: parse_http_init;
-            8000:  parse_http_init;
+#include "include/ports.p4"
             default: accept;
         }
     }
@@ -243,7 +237,6 @@ parser UrlParser(
         meta.url_tag_len   = 0;
         meta.url_sep_len   = 0;
         meta.version_len   = 0;
-        meta.url_isvalid   = 0;
 
         zerofill10(hdr.http_proto,0);
         zerofill10(hdr.http_proto_sep,0);
@@ -502,9 +495,8 @@ control UrlIngress(
         {
             // URL MATCH KEY
             hdr.ipv4.dstAddr: exact;
-            keydef30(exact,hdr.http_url,0);
-            keydef(exact,hdr.http_url,30);
-            keydef(exact,hdr.http_url,31);
+            hdr.tcp.dstPort: exact;
+            meta.url: exact;
         }
         actions =
         {
@@ -526,6 +518,7 @@ control UrlIngress(
         {
             // URL MATCH KEY
             hdr.ipv4.dstAddr: exact;
+            hdr.tcp.dstPort: exact;
             meta.url: ternary;
         }
         actions =
