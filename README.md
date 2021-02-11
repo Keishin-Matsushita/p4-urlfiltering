@@ -75,8 +75,7 @@ h1 は Web クライアント、h2,h3 は http server として動作させま�
    $ make 
    ```
 
-2. You should now see a Mininet command prompt. Try to ping between  
-   hosts in the topology:  
+2. You should now see a Mininet command prompt. Try to ping between hosts in the topology:  
    Mininetコマンドプロンプトが表示されます。 ホスト間で ping を実行してみてください。
    ```bash
    mininet> h1 ping h2
