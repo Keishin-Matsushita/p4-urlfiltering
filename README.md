@@ -9,12 +9,15 @@ The switch compares and determines the IP address and URI, and drops the packet 
 
 ## Running conditions 動作条件
 
-P4 version 16 SEP 2020.    P4 のバージョンは 2020/09/16 となります。  
-Ubuntu 16.04 LTS P4 tutorial VM.   P4 チュートリアルで作成する Ubuntu 16.04 LTS VM で動作します。  
+P4 version 16 SEP 2020.      
+Ubuntu 16.04 LTS P4 tutorial VM.   
 VirtualBox VM from https://github.com/p4lang/tutorials  
-VM の作成方法は上記 URL を参照してください。  
-under run into P4 Development Environment.   P4 開発環境の配下で動作します。  
-
+under run into P4 Development Environment.    
+利用する P4 バージョンは 2020/09/16 となります。  
+P4 チュートリアルで作成する Ubuntu 16.04 LTS VM で動作します。   
+VM の作成方法は https://github.com/p4lang/tutorials を参照してください。
+P4 開発環境下で動作します。  
+ 
 ## Install インストール方法
 1. install threading http server (スレッド型 http server のインストール)  
 In standard http.server, URL blocking by the s1 switch causes the server to become unresponsive.  
