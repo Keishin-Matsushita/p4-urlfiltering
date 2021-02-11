@@ -7,6 +7,7 @@ The switch compares and determines the IP address and URI, and drops the packet 
 クライアントからサーバに http リクエストを送った時に、スイッチにより URL をフィルタリングし遮断します。
 スイッチでは IP アドレス、および URI を比較し判別、対象となった場合にはパケットをドロップします。
 
+
 ## Operating conditions 動作条件
 P4 version 16 SEP 2020.    P4 のバージョンは 2020/09/16 となります。  
 Ubuntu 16.04 LTS P4 tutorial VM   P4 チュートリアルで作成する Ubuntu 16.04 LTS VM で動作します。  
@@ -20,21 +21,21 @@ under run into P4 Development Environment   P4 開発環境の配下で動作し
 In standard http.server, URL blocking by the s1 switch causes the server to become unresponsive.  
 標準の http.server では s1 スイッチによる URL 遮断により、以降 server が応答しなくなります。 
 
-```bash
-$ bash ./install.sh
-```
-... installed python3 lib ComplexHTTPServer
+   ```bash
+   $ bash ./install.sh
+   ```
+   ... installed python3 lib ComplexHTTPServer
 
 2. install p4-urlfiltering (本件のインストール)
 The procedure for installation and running is as follows:  
 インストールと走行は以下の手順となります。
 
-```bash
-$ cd tutolials/exercises
-$ git clone https://github.com/Keishin-Matsushita/p4-urlfiltering.git
-$ cd p4-urlfiltering
-$ make
-```
+   ```bash
+   $ cd tutolials/exercises
+   $ git clone https://github.com/Keishin-Matsushita/p4-urlfiltering.git
+   $ cd p4-urlfiltering
+   $ make
+   ```
 
 ## specification
 
@@ -42,7 +43,7 @@ $ make
 |:--------------------------|:-----------------------------------------------------|:-------|
 |　URL Length Max(最大長)    |　32 文字(ascii)                                       |        |
 |　URL Search Kind(検索方式) |　exact (完全一致)、lpm (longest prefix match) (前方一致) |        |
-|　Hash tag support         | Hash Tag(#,?) separation (ハッシュタグ分離)             |        |
+|　Hash tag support         |　Hash Tag(#,?) separation (ハッシュタグ分離)             |        |
 |　遮断 URL 投入              |　const program (P4 プログラム内)                       |        |
 
 
