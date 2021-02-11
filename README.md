@@ -178,10 +178,12 @@ In standard http.server, URL blocking by the s1 switch causes the server to beco
 - The P4 Table is entered as a constant in the P4 program instead of being submitted from C-Plane  
   P4 Table は C-Plane から投入するのではなく、P4 プログラム内に constant でエントリされてます。
    
-## Future tasks (今後の課題)
+## Issues to be solved (解決した課題)
 - [x] *Separation of HTTP Command and Version*
 - [x] *Separate support for URL hash tags (#/? etc.)*
 - [x] *URL table lpm matching support*
+
+## Future tasks (今後の課題)
 - [ ] URL length more extension
 - [ ] Parsing the true TCP option header instead of using varbit
 - [ ] URL Matching with variable url length
@@ -191,9 +193,6 @@ In standard http.server, URL blocking by the s1 switch causes the server to beco
 - [ ] Learning drop url then block all subsequent packets
 - [ ] Redirect URL (stepping stone) block
 - [ ] Send close to server/response HTTP 404 to client with matching block URL
-
-*Checked represents the resolved issue. チェック済は解決した課題を表します。*
-
 
 ## Revision history  (改定履歴)
 - 2021/02/10 Rev0.00 first release
