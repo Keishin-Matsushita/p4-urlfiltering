@@ -140,7 +140,7 @@ In standard http.server, URL blocking by the s1 switch causes the server to beco
    $ vi url_exact.py                        // edit exact URL list
    $ python3 url_exact.py > url_exact.p4
    $ vi url_lpm.py                          // edit lpm URL list
-   $ python3 url_lpm.py > url_exact.p4
+   $ python3 url_lpm.py > url_lpm.p4
    $ cd ..
    $ make stop; make clean; make      // re-run url.p4
    ```
