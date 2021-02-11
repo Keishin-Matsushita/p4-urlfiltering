@@ -112,46 +112,126 @@ struct metadata
 }
 
 
-#define zerofill(item,idx)  \
+
+
+
+#define ZEROFILL(item,idx)  \
     item[idx].setValid();   \
     item[idx].ch = 0;       \
     item[idx].setInvalid()
 
-#define zerofill10(a,idx)   \
-    zerofill(a,idx);        \
-    zerofill(a,idx+1);      \
-    zerofill(a,idx+2);      \
-    zerofill(a,idx+3);      \
-    zerofill(a,idx+4);      \
-    zerofill(a,idx+5);      \
-    zerofill(a,idx+6);      \
-    zerofill(a,idx+7);      \
-    zerofill(a,idx+8);      \
-    zerofill(a,idx+9)
+#define ZEROFILL10(a,idx)   \
+    ZEROFILL(a,idx);        \
+    ZEROFILL(a,idx+1);      \
+    ZEROFILL(a,idx+2);      \
+    ZEROFILL(a,idx+3);      \
+    ZEROFILL(a,idx+4);      \
+    ZEROFILL(a,idx+5);      \
+    ZEROFILL(a,idx+6);      \
+    ZEROFILL(a,idx+7);      \
+    ZEROFILL(a,idx+8);      \
+    ZEROFILL(a,idx+9)
 
-#define zerofill30(a,idx)   \
-    zerofill10(a,idx);      \
-    zerofill10(a,idx+10);   \
-    zerofill10(a,idx+20)
 
-#define keydef(op,item,idx)  item[idx].ch: op
+#define NUMADD_0_0 0
+#define NUMADD_0_1 1
+#define NUMADD_0_2 2
+#define NUMADD_0_3 3
+#define NUMADD_0_4 4
+#define NUMADD_0_5 5
+#define NUMADD_0_6 6
+#define NUMADD_0_7 7
+#define NUMADD_0_8 8
+#define NUMADD_0_9 9
+#define NUMADD_1_0 1
+#define NUMADD_1_1 2
+#define NUMADD_1_2 3
+#define NUMADD_1_3 4
+#define NUMADD_1_4 5
+#define NUMADD_1_5 6
+#define NUMADD_1_6 7
+#define NUMADD_1_7 8
+#define NUMADD_1_8 9
+#define NUMADD_1_9 10
+#define NUMADD_10_0 10
+#define NUMADD_10_1 11
+#define NUMADD_10_2 12
+#define NUMADD_10_3 13
+#define NUMADD_10_4 14
+#define NUMADD_10_5 15
+#define NUMADD_10_6 16
+#define NUMADD_10_7 17
+#define NUMADD_10_8 18
+#define NUMADD_10_9 19
+#define NUMADD_11_0 11
+#define NUMADD_11_1 12
+#define NUMADD_11_2 13
+#define NUMADD_11_3 14
+#define NUMADD_11_4 15
+#define NUMADD_11_5 16
+#define NUMADD_11_6 17
+#define NUMADD_11_7 18
+#define NUMADD_11_8 19
+#define NUMADD_11_9 20
+#define NUMADD_20_0 20
+#define NUMADD_20_1 21
+#define NUMADD_20_2 22
+#define NUMADD_20_3 23
+#define NUMADD_20_4 24
+#define NUMADD_20_5 25
+#define NUMADD_20_6 26
+#define NUMADD_20_7 27
+#define NUMADD_20_8 28
+#define NUMADD_20_9 29
+#define NUMADD_21_0 21
+#define NUMADD_21_1 22
+#define NUMADD_21_2 23
+#define NUMADD_21_3 24
+#define NUMADD_21_4 25
+#define NUMADD_21_5 26
+#define NUMADD_21_6 27
+#define NUMADD_21_7 28
+#define NUMADD_21_8 29
+#define NUMADD_21_9 30
+#define NUMADD_30_0 30
+#define NUMADD_30_1 31
+#define NUMADD_31_0 31
 
-#define keydef10(op,item,idx) \
-    keydef(op,item,idx);      \
-    keydef(op,item,idx+1);    \
-    keydef(op,item,idx+2);    \
-    keydef(op,item,idx+3);    \
-    keydef(op,item,idx+4);    \
-    keydef(op,item,idx+5);    \
-    keydef(op,item,idx+6);    \
-    keydef(op,item,idx+7);    \
-    keydef(op,item,idx+8);    \
-    keydef(op,item,idx+9)
+#define TRANS_PARSE_URL_SHIFT(num,add)      					\
+        NUMADD_##num##_##add : parse_url_shift_##num##_##add
 
-#define keydef30(op,item,idx) \
-    keydef10(op,item,idx);    \
-    keydef10(op,item,idx+10); \
-    keydef10(op,item,idx+20)
+#define PARSE_URL_SHIFT(num,add)                         \
+    state parse_url_shift_##num##_##add                  \
+    {                                                    \
+        meta.ch = meta.ch << ((NUMADD_##num##_##add)*8); \
+        transition parse_url_shift_done;                 \
+    }
+
+#define TRANS_PARSE_URL_SHIFT10(num)     \
+        TRANS_PARSE_URL_SHIFT(num,0);    \
+        TRANS_PARSE_URL_SHIFT(num,1);    \
+        TRANS_PARSE_URL_SHIFT(num,2);    \
+        TRANS_PARSE_URL_SHIFT(num,3);    \
+        TRANS_PARSE_URL_SHIFT(num,4);    \
+        TRANS_PARSE_URL_SHIFT(num,5);    \
+        TRANS_PARSE_URL_SHIFT(num,6);    \
+        TRANS_PARSE_URL_SHIFT(num,7);    \
+        TRANS_PARSE_URL_SHIFT(num,8);    \
+        TRANS_PARSE_URL_SHIFT(num,9)
+
+#define PARSE_URL_SHIFT10(num)     \
+        PARSE_URL_SHIFT(num,0)     \
+        PARSE_URL_SHIFT(num,1)     \
+        PARSE_URL_SHIFT(num,2)     \
+        PARSE_URL_SHIFT(num,3)     \
+        PARSE_URL_SHIFT(num,4)     \
+        PARSE_URL_SHIFT(num,5)     \
+        PARSE_URL_SHIFT(num,6)     \
+        PARSE_URL_SHIFT(num,7)     \
+        PARSE_URL_SHIFT(num,8)     \
+        PARSE_URL_SHIFT(num,9)
+
+
 
 
 
@@ -238,19 +318,23 @@ parser UrlParser(
         meta.url_sep_len   = 0;
         meta.version_len   = 0;
 
-        zerofill10(hdr.http_proto,0);
-        zerofill10(hdr.http_proto_sep,0);
+        ZEROFILL10(hdr.http_proto,0);
+        ZEROFILL10(hdr.http_proto_sep,0);
 
-        zerofill30(hdr.http_url,0);
-        zerofill(hdr.http_url,30);
-        zerofill(hdr.http_url,31);
+        ZEROFILL10(hdr.http_url,0); 
+        ZEROFILL10(hdr.http_url,10);
+        ZEROFILL10(hdr.http_url,20);
+        ZEROFILL(hdr.http_url,30);
+        ZEROFILL(hdr.http_url,31);
 
-        zerofill30(hdr.http_url_tag,0);
-        zerofill(hdr.http_url_tag,30);
-        zerofill(hdr.http_url_tag,31);
+        ZEROFILL10(hdr.http_url_tag,0); 
+        ZEROFILL10(hdr.http_url_tag,10);
+        ZEROFILL10(hdr.http_url_tag,20);
+        ZEROFILL(hdr.http_url_tag,30);
+        ZEROFILL(hdr.http_url_tag,31);
 
-        zerofill10(hdr.http_url_sep,0);
-        zerofill10(hdr.http_version,0);
+        ZEROFILL10(hdr.http_url_sep,0);
+        ZEROFILL10(hdr.http_version,0);
 
         meta.url = 0;
 
@@ -293,80 +377,17 @@ parser UrlParser(
         transition select(meta.ch_url_len)
         {
             0: parse_url_shift_done;
-            1: parse_url_shift1;
-            2: parse_url_shift2;
-            3: parse_url_shift3;
-            4: parse_url_shift4;
-            5: parse_url_shift5;
-            6: parse_url_shift6;
-            7: parse_url_shift7;
-            8: parse_url_shift8;
-            9: parse_url_shift9;
-           10: parse_url_shift10;
-           11: parse_url_shift11;
-           12: parse_url_shift12;
-           13: parse_url_shift13;
-           14: parse_url_shift14;
-           15: parse_url_shift15;
-           16: parse_url_shift16;
-           17: parse_url_shift17;
-           18: parse_url_shift18;
-           19: parse_url_shift19;
-           20: parse_url_shift20;
-           21: parse_url_shift21;
-           22: parse_url_shift22;
-           23: parse_url_shift23;
-           24: parse_url_shift24;
-           25: parse_url_shift25;
-           26: parse_url_shift26;
-           27: parse_url_shift27;
-           28: parse_url_shift28;
-           29: parse_url_shift29;
-           30: parse_url_shift30;
-           31: parse_url_shift31;
+            TRANS_PARSE_URL_SHIFT10(1);
+            TRANS_PARSE_URL_SHIFT10(11);
+            TRANS_PARSE_URL_SHIFT10(21);
+            TRANS_PARSE_URL_SHIFT(31,0);
         }
     }
 
-#define _PARSE_URL_SHIFT(num,bits)       \
-    state parse_url_shift##num           \
-    {                                    \
-        meta.ch = meta.ch << bits;       \
-        transition parse_url_shift_done; \
-    }
-
-#define PARSE_URL_SHIFT(num) _PARSE_URL_SHIFT(num,num*8)
-
-    PARSE_URL_SHIFT(1)
-    PARSE_URL_SHIFT(2)
-    PARSE_URL_SHIFT(3)
-    PARSE_URL_SHIFT(4)
-    PARSE_URL_SHIFT(5)
-    PARSE_URL_SHIFT(6)
-    PARSE_URL_SHIFT(7)
-    PARSE_URL_SHIFT(8)
-    PARSE_URL_SHIFT(9)
-    PARSE_URL_SHIFT(10)
-    PARSE_URL_SHIFT(11)
-    PARSE_URL_SHIFT(12)
-    PARSE_URL_SHIFT(13)
-    PARSE_URL_SHIFT(14)
-    PARSE_URL_SHIFT(15)
-    PARSE_URL_SHIFT(16)
-    PARSE_URL_SHIFT(17)
-    PARSE_URL_SHIFT(18)
-    PARSE_URL_SHIFT(19)
-    PARSE_URL_SHIFT(20)
-    PARSE_URL_SHIFT(21)
-    PARSE_URL_SHIFT(22)
-    PARSE_URL_SHIFT(23)
-    PARSE_URL_SHIFT(24)
-    PARSE_URL_SHIFT(25)
-    PARSE_URL_SHIFT(26)
-    PARSE_URL_SHIFT(27)
-    PARSE_URL_SHIFT(28)
-    PARSE_URL_SHIFT(29)
-    PARSE_URL_SHIFT(30)
-    PARSE_URL_SHIFT(31)
+    PARSE_URL_SHIFT10(1)
+    PARSE_URL_SHIFT10(11)
+    PARSE_URL_SHIFT10(21)
+    PARSE_URL_SHIFT(31,0)
 
     state parse_url_shift_done
     {
