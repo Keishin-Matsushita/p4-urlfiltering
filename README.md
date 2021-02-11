@@ -145,18 +145,18 @@ In standard http.server, URL blocking by the s1 switch causes the server to beco
    ```
    :triangular_flag_on_post:  
    URL searches include exact matches(EXACT) and long prefix matches(LPM).    
-   'url_exact.py' is generate exactly match url list.  
-   'url_lpm.py' is generate longest prefix match url list.  
+   `url_exact.py` is generate exactly match url list.  
+   `url_lpm.py` is generate longest prefix match url list.  
    URLs that exactly or prefix match this will be dropped.  
    
    URL 検索は完全一致(EXACT)と前方一致(LPM)があります。  
-   'url_exact.py' は完全一致 URL リストを作成します。 
-   'url_lpm.py' は前方一致 URL リストを作成します。 
-   これに完全もしくは前方一致した URL はドロップになります。
+   `url_exact.py` は完全一致 URL リストを作成します。   
+   `url_lpm.py` は前方一致 URL リストを作成します。 
+   これに完全もしくは前方一致した URL はドロップになります。 
    
    - LPM (longest prefix match)  
-   A prefix match means that the URI matches all the targets to be searched from the prefix. 
-   前方一致とは URI が前方から検索すべき対象にすべて一致することを表します。  
+   A prefix match means that the URI matches all the targets to be searched from the prefix.   
+   前方一致とは URI が前方から検索すべき対象にすべて一致することを表します。    
    LPM: http://10.0.0.2/include/  
    http://10.0.0.2/include/   　　　 match(一致)  
    http://10.0.0.2/include/url.p4   match(一致)  
