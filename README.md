@@ -8,7 +8,7 @@ The switch compares and determines the IP address and URI, and drops the packet 
 スイッチでは IP アドレス、および URI を比較し判別、対象となった場合にはパケットをドロップします。  
 
 
-## Operating conditions 動作条件
+## Running conditions 動作条件
 P4 version 16 SEP 2020.    P4 のバージョンは 2020/09/16 となります。  
 Ubuntu 16.04 LTS P4 tutorial VM   P4 チュートリアルで作成する Ubuntu 16.04 LTS VM で動作します。  
 VirtualBox VM from https://github.com/p4lang/tutorials  
