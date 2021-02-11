@@ -202,13 +202,6 @@ h1 は Web クライアント、h2,h3 は http server として動作させま�
   URL の長さは最大 32 文字です。
 - The URL Table is entered as a constant in the P4 program instead of being submitted from C-Plane  
   URL Table は C-Plane から投入するのではなく、P4 プログラム内に constant でエントリされてます。
-- Precautions when editing URL (URL 編集上の注意点)   
-  Currently, at least one URL is required for each exact and lpm list.   
-  If there is no URL in either exact or lpm, url.p4 compilation will fail.  
-  This issue will be fixed in due course.  
-  現在、exact,lpm リストごとに少なくとも 1 つのURLが必要です。  
-  exact,lpm リストにて URL が 1 つもない場合、url.p4 のコンパイルは失敗します。  
-  この問題はいずれ改修します。 
    
 ## Issues to be solved (解決した課題)
 - [x] *Separation of HTTP Command and Version*
@@ -225,7 +218,6 @@ h1 は Web クライアント、h2,h3 は http server として動作させま�
 - [ ] Learning drop url then block all subsequent packets
 - [ ] Redirect URL (stepping stone) block
 - [ ] Send close to server/response HTTP 404 to client with matching block URL
-- [ ] If the URL list is empty, the url.p4 compilation will fail.
 
 ## Revision history  (改定履歴)
 - 2021/02/10 Rev0.000 first release
