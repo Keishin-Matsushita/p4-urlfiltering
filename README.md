@@ -2,20 +2,49 @@
 web url filtering by p4 language  
 P4言語で実現する url フィルタリング
 
+When a client sends an http request to the server, the switch filters and blocks the URL.
+The switch compares and determines the IP address and URI, and drops the packet if it becomes a target.  
+クライアントからサーバに http リクエストを送った時に、スイッチにより URL をフィルタリングし遮断します。
+スイッチでは IP アドレス、および URI を比較し判別、対象となった場合にはパケットをドロップします。
+
+## Operating conditions 動作条件
 P4 version 16 SEP 2020.    P4 のバージョンは 2020/09/16 となります。  
 Ubuntu 16.04 LTS P4 tutorial VM   P4 チュートリアルで作成する Ubuntu 16.04 LTS VM で動作します。  
 VirtualBox VM from https://github.com/p4lang/tutorials  
 VM の作成方法は上記 URL を参照してください。  
 under run into P4 Development Environment   P4 開発環境の配下で動作します。  
-The procedure for installation and running is as follows:   インストールと走行は以下の手順となります。  
+
+
+## Install インストール方法
+1. install threading http server (スレッド型 http server のインストール)  
+In standard http.server, URL blocking by the s1 switch causes the server to become unresponsive.  
+標準の http.server では s1 スイッチによる URL 遮断により、以降 server が応答しなくなります。 
+
+```bash
+$ bash ./install.sh
+```
+... installed python3 lib ComplexHTTPServer
+
+2. install p4-urlfiltering (本件のインストール)
+The procedure for installation and running is as follows:  
+インストールと走行は以下の手順となります。
 
 ```bash
 $ cd tutolials/exercises
 $ git clone https://github.com/Keishin-Matsushita/p4-urlfiltering.git
 $ cd p4-urlfiltering
 $ make
-
 ```
+
+## specification
+
+|　項目                      |　内容                                                 | 備考   |
+|:--------------------------|:-----------------------------------------------------|:-------|
+|　URL Length Max(最大長)    |　32 文字(ascii)                                       |        |
+|　URL Search Kind(検索方式) |　exact (完全一致)、lpm (longest prefix match) (前方一致) |        |
+|　Hash tag support         | Hash Tag(#,?) separation (ハッシュタグ分離)             |        |
+|　遮断 URL 投入              |　const program (P4 プログラム内)                       |        |
+
 
 
 ## Implementing url filtering 
@@ -37,17 +66,7 @@ h1 は Web クライアント、h2,h3 は http server として動作させま�
                 http servers
 
 
-## Step 1: install threading http server (スレッド型 http server のインストール)  
-In standard http.server, URL blocking by the s1 switch causes the server to become unresponsive.  
-標準の http.server では s1 スイッチによる URL 遮断により、以降 server が応答しなくなります。 
-
-   ```bash
-   $ bash ./install.sh
-   ```
-   ... installed python3 lib ComplexHTTPServer
-
-
-## Step 2: Run the p4 code `url.p4` (url.p4 を作動させる方法です)
+## Step 1: Run the p4 code `url.p4` (url.p4 を作動させる方法です)
 
 1. In your shell, run:
    シェルで以下のコマンドを打ちます。
@@ -132,7 +151,7 @@ In standard http.server, URL blocking by the s1 switch causes the server to beco
    ```
 
 
-## Step 3: Edit the filtering URL list (遮断 URL の編集)
+## Step 2: Edit the filtering URL list (遮断 URL の編集)
    edit URL list and re-run url.p4  
    URLリストを編集してurl.p4を再実行します。
    ```bash
