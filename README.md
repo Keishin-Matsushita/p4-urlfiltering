@@ -165,23 +165,19 @@ h1 は Web クライアント、h2,h3 は http server として動作させま�
    URLリストを編集してurl.p4を再実行します。
    ```bash
    $ cd include
-   $ vi url_exact.py                        // edit exact URL list
-   $ python3 url_exact.py > url_exact.p4
-   $ vi url_lpm.py                          // edit lpm URL list
-   $ python3 url_lpm.py > url_lpm.p4
+   $ vi url.py                             // edit block URL list
+   $ python3 url.py
    $ cd ..
    $ make stop; make clean; make      // re-run url.p4
    ```
    :triangular_flag_on_post:  
    URL searches include exact matches(EXACT) and long prefix matches(LPM).    
-   `url_exact.py` is generate exactly match url list.  
-   `url_lpm.py` is generate longest prefix match url list.  
-   URLs that exactly or prefix match this will be dropped.  
+   `url.py` is generate exactly,lpm match url list and check IP Address and TCP ports list.  
+   The URL determined by this will be a drop.  
    
    URL 検索は完全一致(EXACT)と前方一致(LPM)があります。  
-   `url_exact.py` は完全一致 URL リストを作成します。   
-   `url_lpm.py` は前方一致 URL リストを作成します。  
-   これに完全もしくは前方一致した URL はドロップになります。 
+   `url.py` は完全一致,及び前方一致 URL リスト、及び裁可する IP アドレス、TCP ポートのリストを作成します。   
+   これににより判定された URL はドロップになります。 
    
    - LPM (longest prefix match)  
    A prefix match means that the URI matches all the targets to be searched from the prefix.   
