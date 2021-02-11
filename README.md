@@ -165,8 +165,8 @@ h1 は Web クライアント、h2,h3 は http server として動作させま�
    URLリストを編集してurl.p4を再実行します。
    ```bash
    $ cd include
-   $ vi url.py                             // edit block URL list
-   $ python3 url.py
+   $ vi url.py                        // edit block URL list
+   $ python3 url.py                   // generate P4 URL Tables
    $ cd ..
    $ make stop; make clean; make      // re-run url.p4
    ```
