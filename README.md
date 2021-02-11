@@ -12,7 +12,7 @@ The switch compares and determines the IP address,port and URI, and drops the pa
 P4 version 16 SEP 2020.      
 Ubuntu 16.04 LTS P4 tutorial VM.   
 VirtualBox VM from https://github.com/p4lang/tutorials  
-under run into P4 Behavior Model Development Environment.    
+Operates under P4 Behavior Model development environment.  
 利用する P4 バージョンは 2020/09/16 となります。  
 P4 チュートリアルで作成する Ubuntu 16.04 LTS VM で動作します。   
 VM の作成方法は https://github.com/p4lang/tutorials を参照してください。  
