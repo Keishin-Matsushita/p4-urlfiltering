@@ -121,7 +121,7 @@ h1 は Web クライアント、h2,h3 は http server として動作させま�
    # curl http://10.0.0.3/
    hello index 　　　　　　　　　　　　  (response/応答が返ります)
    
-   # curl http://10.0.0.2/index,html
+   # curl http://10.0.0.2/index.html
    -- no reply by s1 url blocking 　 (s1 url blocking により応答が返りません)
    -- type CTL-C                     (CTL-C を押してコマンドを停止してください)
    
