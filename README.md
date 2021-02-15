@@ -212,12 +212,9 @@ h1 は Web クライアント、h2,h3 は http server として動作させま�
 
 ## Future tasks (今後の課題)
 - [ ] URL length more extension
-- [ ] Parsing the true TCP option header instead of using varbit
-- [ ] URL Matching with variable url length
 - [ ] Multi Host IP (Redundant Web server) support
 - [ ] Input of match URL Source with P4-Runtime
 - [ ] Learning drop url then block all subsequent packets
-- [ ] Redirect URL (stepping stone) block
 - [ ] Send close to server/response HTTP 404 to client with matching block URL
 
 ## Revision history  (改定履歴)
