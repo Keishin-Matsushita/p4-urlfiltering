@@ -214,7 +214,7 @@ h1 は Web クライアント、h2,h3 は http server として動作させま�
 - [ ] URL length more extension
 - [ ] Multi Host IP (Redundant Web server) support
 - [ ] Input of match URL Source with P4-Runtime
-- [ ] Learning drop url then block all subsequent packets
+- [ ] Found drop url then block all subsequent packets
 - [ ] Send close to server/response HTTP 404 to client with matching block URL
 
 ## Revision history  (改定履歴)
