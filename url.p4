@@ -4,7 +4,7 @@
 //*   PURPOSE: URL Filterng by p4                                    *
 //* FORMATTED: P4_16 v1model (16 SEP 2020 version)                   *
 //*   WRITTEN: 2021/02/09 Matsushita "spicy" Keishin                 *
-//*  REVISION: 0.011 2021/02/11                                      *
+//*  REVISION: 0.012 2021/02/11                                      *
 //********************************************************************
 
 #include <core.p4>
@@ -14,6 +14,10 @@
 const bit<16> TYPE_ARP  = 0x806;
 const bit<16> TYPE_IPV4 = 0x800;
 const bit<8>  TYPE_TCP = 6;
+
+#define URL_BYTES    256
+#define URL_BYTES_1  255
+#define URL_BITS	 (URL_BYTES*8)
 
 // H E A D E R S --------------------------------------------------------
 
@@ -83,154 +87,35 @@ header char_t
 
 struct headers 
 {
-    ethernet_t   ethernet;
-    arp_t        arp;
-    ipv4_t       ipv4;
-    tcp_t        tcp;
-    tcp_opt_t    tcp_opt;
-    char_t[10]   http_proto;     // GET,POST,DELETE  HTTP PROTOCOL
-    char_t[10]   http_proto_sep; // ' '              HTTP PROTOCOL SPECE
-    char_t[32]   http_url;       // /index.html      HTTP URL MAX LENGTH 32
-    char_t[32]   http_url_tag;   // ?id=20           HTTP URL TAG ?,#
-    char_t[10]   http_url_sep;   // ' '              HTTP URL SPECE
-    char_t[10]   http_version;   // HTTP/1.1         HTTP VERSION
+    ethernet_t         ethernet;
+    arp_t              arp;
+    ipv4_t             ipv4;
+    tcp_t              tcp;
+    tcp_opt_t          tcp_opt;
+    char_t[10]         http_proto;     // GET,POST      HTTP PROTOCOL
+    char_t[10]         http_proto_sep; // ' '           HTTP PROTOCOL SPACE
+    char_t[URL_BYTES]  http_url;       // /index.html   HTTP URL
+    char_t[URL_BYTES]  http_url_tag;   // ?id=20        HTTP URL TAG ?,#
+    char_t[10]         http_url_sep;   // ' '           HTTP URL SPACE
+    char_t[10]         http_version;   // HTTP/1.1      HTTP VERSION
 }
 
 struct metadata 
 {
-    bit<16>     proto_len;
-    bit<16>     proto_sep_len;
-    bit<16>     url_len;
-    bit<16>     url_tag_len;
-    bit<16>     url_sep_len;
-    bit<16>     version_len;
-    bit<256>    url;
-    bit<256>    ch;
-    bit<16>     ch_url_len;
-    bit<8>      mid;
-    bit<1>      url_isvalid;
+    // HTTP INFO
+    bit<16>         proto_len;
+    bit<16>         proto_sep_len;
+    bit<16>         url_tag_len;
+    bit<16>         url_sep_len;
+    bit<16>         version_len;
+    bit<16>         url_len;
+    bit<16>         ch_url_len;
+    bit<URL_BITS>   url;
+    bit<URL_BITS>   ch;
+    bit<1>          url_isvalid;
 }
 
-
-
-
-
-#define ZEROFILL(item,idx)  \
-    item[idx].setValid();   \
-    item[idx].ch = 0;       \
-    item[idx].setInvalid()
-
-#define ZEROFILL10(a,idx)   \
-    ZEROFILL(a,idx);        \
-    ZEROFILL(a,idx+1);      \
-    ZEROFILL(a,idx+2);      \
-    ZEROFILL(a,idx+3);      \
-    ZEROFILL(a,idx+4);      \
-    ZEROFILL(a,idx+5);      \
-    ZEROFILL(a,idx+6);      \
-    ZEROFILL(a,idx+7);      \
-    ZEROFILL(a,idx+8);      \
-    ZEROFILL(a,idx+9)
-
-
-#define NUMADD_0_0 0
-#define NUMADD_0_1 1
-#define NUMADD_0_2 2
-#define NUMADD_0_3 3
-#define NUMADD_0_4 4
-#define NUMADD_0_5 5
-#define NUMADD_0_6 6
-#define NUMADD_0_7 7
-#define NUMADD_0_8 8
-#define NUMADD_0_9 9
-#define NUMADD_1_0 1
-#define NUMADD_1_1 2
-#define NUMADD_1_2 3
-#define NUMADD_1_3 4
-#define NUMADD_1_4 5
-#define NUMADD_1_5 6
-#define NUMADD_1_6 7
-#define NUMADD_1_7 8
-#define NUMADD_1_8 9
-#define NUMADD_1_9 10
-#define NUMADD_10_0 10
-#define NUMADD_10_1 11
-#define NUMADD_10_2 12
-#define NUMADD_10_3 13
-#define NUMADD_10_4 14
-#define NUMADD_10_5 15
-#define NUMADD_10_6 16
-#define NUMADD_10_7 17
-#define NUMADD_10_8 18
-#define NUMADD_10_9 19
-#define NUMADD_11_0 11
-#define NUMADD_11_1 12
-#define NUMADD_11_2 13
-#define NUMADD_11_3 14
-#define NUMADD_11_4 15
-#define NUMADD_11_5 16
-#define NUMADD_11_6 17
-#define NUMADD_11_7 18
-#define NUMADD_11_8 19
-#define NUMADD_11_9 20
-#define NUMADD_20_0 20
-#define NUMADD_20_1 21
-#define NUMADD_20_2 22
-#define NUMADD_20_3 23
-#define NUMADD_20_4 24
-#define NUMADD_20_5 25
-#define NUMADD_20_6 26
-#define NUMADD_20_7 27
-#define NUMADD_20_8 28
-#define NUMADD_20_9 29
-#define NUMADD_21_0 21
-#define NUMADD_21_1 22
-#define NUMADD_21_2 23
-#define NUMADD_21_3 24
-#define NUMADD_21_4 25
-#define NUMADD_21_5 26
-#define NUMADD_21_6 27
-#define NUMADD_21_7 28
-#define NUMADD_21_8 29
-#define NUMADD_21_9 30
-#define NUMADD_30_0 30
-#define NUMADD_30_1 31
-#define NUMADD_31_0 31
-
-#define TRANS_PARSE_URL_SHIFT(num,add)      					\
-        NUMADD_##num##_##add : parse_url_shift_##num##_##add
-
-#define PARSE_URL_SHIFT(num,add)                         \
-    state parse_url_shift_##num##_##add                  \
-    {                                                    \
-        meta.ch = meta.ch << ((NUMADD_##num##_##add)*8); \
-        transition parse_url_shift_done;                 \
-    }
-
-#define TRANS_PARSE_URL_SHIFT10(num)     \
-        TRANS_PARSE_URL_SHIFT(num,0);    \
-        TRANS_PARSE_URL_SHIFT(num,1);    \
-        TRANS_PARSE_URL_SHIFT(num,2);    \
-        TRANS_PARSE_URL_SHIFT(num,3);    \
-        TRANS_PARSE_URL_SHIFT(num,4);    \
-        TRANS_PARSE_URL_SHIFT(num,5);    \
-        TRANS_PARSE_URL_SHIFT(num,6);    \
-        TRANS_PARSE_URL_SHIFT(num,7);    \
-        TRANS_PARSE_URL_SHIFT(num,8);    \
-        TRANS_PARSE_URL_SHIFT(num,9)
-
-#define PARSE_URL_SHIFT10(num)     \
-        PARSE_URL_SHIFT(num,0)     \
-        PARSE_URL_SHIFT(num,1)     \
-        PARSE_URL_SHIFT(num,2)     \
-        PARSE_URL_SHIFT(num,3)     \
-        PARSE_URL_SHIFT(num,4)     \
-        PARSE_URL_SHIFT(num,5)     \
-        PARSE_URL_SHIFT(num,6)     \
-        PARSE_URL_SHIFT(num,7)     \
-        PARSE_URL_SHIFT(num,8)     \
-        PARSE_URL_SHIFT(num,9)
-
+#include "include/define.p4"
 
 
 
@@ -318,23 +203,15 @@ parser UrlParser(
         meta.url_sep_len   = 0;
         meta.version_len   = 0;
 
-        ZEROFILL10(hdr.http_proto,0);
-        ZEROFILL10(hdr.http_proto_sep,0);
+        // ZEROFILL10(hdr.http_proto,0);
+        // ZEROFILL10(hdr.http_proto_sep,0);
 
-        ZEROFILL10(hdr.http_url,0); 
-        ZEROFILL10(hdr.http_url,10);
-        ZEROFILL10(hdr.http_url,20);
-        ZEROFILL(hdr.http_url,30);
-        ZEROFILL(hdr.http_url,31);
+        ZEROFILLMAX(hdr.http_url); 
 
-        ZEROFILL10(hdr.http_url_tag,0); 
-        ZEROFILL10(hdr.http_url_tag,10);
-        ZEROFILL10(hdr.http_url_tag,20);
-        ZEROFILL(hdr.http_url_tag,30);
-        ZEROFILL(hdr.http_url_tag,31);
+        // ZEROFILLMAX(hdr.http_url_tag); 
 
-        ZEROFILL10(hdr.http_url_sep,0);
-        ZEROFILL10(hdr.http_version,0);
+        // ZEROFILL10(hdr.http_url_sep,0);
+        // ZEROFILL10(hdr.http_version,0);
 
         meta.url = 0;
 
@@ -371,23 +248,17 @@ parser UrlParser(
     state parse_http_url
     {
         packet.extract(hdr.http_url.next);
-        meta.ch = (bit<256>)(hdr.http_url.last.ch);
-        meta.ch_url_len = 31 - meta.url_len;
+        meta.ch = (bit<URL_BITS>)(hdr.http_url.last.ch);
+        meta.ch_url_len = URL_BYTES_1 - meta.url_len;
         meta.url_len = meta.url_len + 1;
         transition select(meta.ch_url_len)
         {
             0: parse_url_shift_done;
-            TRANS_PARSE_URL_SHIFT10(1);
-            TRANS_PARSE_URL_SHIFT10(11);
-            TRANS_PARSE_URL_SHIFT10(21);
-            TRANS_PARSE_URL_SHIFT(31,0);
+            TRANS_PARSE_URL_SHIFT_MAX();
         }
     }
 
-    PARSE_URL_SHIFT10(1)
-    PARSE_URL_SHIFT10(11)
-    PARSE_URL_SHIFT10(21)
-    PARSE_URL_SHIFT(31,0)
+    PARSE_URL_SHIFT_MAX()
 
     state parse_url_shift_done
     {
@@ -522,12 +393,11 @@ control UrlIngress(
         actions =
         {
             act_http_url_match;
-            NoAction;
         }
-        default_action = NoAction();
 
         // URL MATCH DATA
 #include "include/url_exact.p4"
+
     }
 
     // URL LPM MATCHING
@@ -543,12 +413,11 @@ control UrlIngress(
         actions =
         {
             act_http_url_match;
-            NoAction;
         }
-        default_action = NoAction();
 
         // URL MATCH DATA
 #include "include/url_lpm.p4"
+
     }
 
 
@@ -567,8 +436,11 @@ control UrlIngress(
             if( meta.url_isvalid == 1 )
             {
                 // IF HTTP URL PACKET MATCH TABLE APPLY
-                tbl_http_url_exact.apply();
-                tbl_http_url_lpm.apply();
+                if( ! tbl_http_url_lpm.apply().hit )
+                {
+                    // LPM UNMATCH URL
+                    tbl_http_url_exact.apply();
+                }
             }
         }
     }
