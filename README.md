@@ -1,4 +1,4 @@
-# p4-urlfiltering　rev0.011
+# p4-urlfiltering　rev0.012
 web url filtering by p4 language  
 P4言語で実現する url フィルタリング
 
@@ -44,7 +44,7 @@ The procedure for installation and running is as follows:
 |Item (項目)                  |Detail (内容)                                          |Remarks (備考) |
 |:----------------------------|:-----------------------------------------------------|:-------------|
 |Support P4 language (P4 言語) | P4_16 (16 SEP 2020) v1model Behavior Model           |              |
-|URL Length Max(最大長)         |32 ascii (32 アスキー文字)                             |              |
+|URL Length Max(最大長)         |256 ascii (256 アスキー文字)                           |Rev0.012      |
 |URL Match Kind(検索方式)       |exact (完全一致)</br>lpm (longest prefix match) (前方一致) |Rev 0.011     |
 |URL Hash tag support          |Hash Tag(#,?) separation (ハッシュタグ分離)            |Rev 0.010      |
 |URL port support (ポート別 URL) |Supports blocking individual ports in URLs          |Rev 0.011     |
@@ -199,8 +199,8 @@ h1 は Web クライアント、h2,h3 は http server として動作させま�
   URL で判別するのは IP アドレス TCP ポート及び URL 中の URI 部分となりました。  
 - The part after the hash(#,?) of the URL is ignored by the table search.  
   URL のハッシュ以降の部分は URL 検索からは無視されます。   
-- MAX URL Length is 32  
-  URL の長さは最大 32 文字です。
+- MAX URL Length is 256  
+  URL の長さは最大 256 文字です。
 - The URL Table is entered as a constant in the P4 program instead of being submitted from C-Plane  
   URL Table は C-Plane から投入するのではなく、P4 プログラム内に constant でエントリされてます。
    
@@ -223,6 +223,7 @@ h1 は Web クライアント、h2,h3 は http server として動作させま�
 ## Revision history  (改定履歴)
 - 2021/02/10 Rev0.000 first release
 - 2021/02/11 Rev0.010 URL equal URI. URL Hash Tag ignore
-- :triangular_flag_on_post:　2021/02/11 Rev0.011 URL lpm match, URL port support
+- 2021/02/11 Rev0.011 URL lpm match, URL port support
+- :triangular_flag_on_post:　2021/02/15 Rev0.012 URL length 32→256 extent
 
    
